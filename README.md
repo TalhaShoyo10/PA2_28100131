@@ -84,11 +84,20 @@ The PPO value checkpoint is intentionally released as the exact staff midpoint s
 ### Task 1 - DPO
 
 ```bash
-python -m task1_dpo.train --config configs/dpo.yaml --run-name standard
+python -m pytest tests/ -q                                                    # objective validation
+python -m task1_dpo.train --config configs/dpo.yaml --run-name standard      # Step 1: one epoch
 python -m task1_dpo.evaluate --config configs/dpo.yaml --adapter outputs/task1_dpo/standard --name standard
-python -m task1_dpo.ablate_beta --config configs/dpo.yaml
-python -m task1_dpo.analyze_length --config configs/dpo.yaml
+python -m task1_dpo.evaluate --config configs/dpo.yaml --name sft             # reference point (SFT)
+python -m task1_dpo.ablate_beta --config configs/dpo.yaml                     # Step 2: beta 0.03/0.10/0.30 (or --only <beta>)
+python -m task1_dpo.analyze_length --config configs/dpo.yaml                  # Step 3: length-balanced + comparison
+python -m task1_dpo.summarize --config configs/dpo.yaml                       # results/task1_dpo/summary.csv
 ```
+
+Pairs whose prompt alone is at least `max_sequence_length` (768) tokens are excluded from every Task 1 training and evaluation set by one rule; excluded IDs are saved in each run's `dropped_long_prompts.json`.
+
+### Running on Colab
+
+`colab/PA2_runner.ipynb` clones this repository, installs the pinned environment, downloads/validates assets, runs the tests, and executes the commands above. `outputs/` and `results/` are linked to a shared Google Drive folder so runs can continue across Colab accounts; every experiment records its status, git commit, command, configuration, runtime, and metrics under `results/<task>/<experiment_id>/`.
 
 ### Task 2 - PPO
 

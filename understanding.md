@@ -78,3 +78,75 @@ Inputs: `rewards [N]`, `group_ids [N]` (N = prompts × K). Output: one scalar ad
 - *Validation:* tests compare against `(r−μ)/(σ+1e-6)`.
 
 **Normalization (not a defect, Task 3 Step 3).** `loss_type="grpo"` divides each sequence's token sum by its own length T_k (each completion gets equal total weight → per-token gradient ∝ 1/T_k, short completions' tokens weigh more). `loss_type="dr_grpo"` divides by the constant `max_completion_length` (each token gets equal weight → long completions carry more total gradient). This is what the normalization study measures.
+
+---
+
+## 4. DPO training loop — `task1_dpo/train.py::run_training`
+
+**Data flow per micro-batch** (batch_size = 2 pairs):
+1. `make_collate` → `encode_prompt_response` builds `prompt + response + EOS` token ids and a
+   `response_mask` that is 1 only on response tokens. Chosen and rejected are padded separately
+   (left padding), giving two dicts of `[2, L]` tensors.
+2. `dpo_forward`:
+   - policy pass (LoRA active, dropout on, gradients on) → `pc, pr` = summed response-token log-probs `[2]`;
+   - reference pass inside `reference_mode` (LoRA **disabled**, eval mode, `no_grad`) → `rc, rr`.
+     The reference is the same base weights without the adapter, so no second 1.5B model is needed.
+   - `dpo_loss(pc, pr, rc, rr, β)`.
+3. Gradient accumulation: 8 micro-batches = 16 pairs per optimizer update. Each micro-loss is divided
+   by the real window size, so the final shorter window is not under-weighted.
+4. Update: unscale → clip grad-norm to 1.0 (config) → AdamW step (lr 2e-5, constant — the config
+   defines no schedule).
+
+**Why the reference must have the adapter disabled.** If the reference pass used the LoRA weights,
+rc = pc and m ≡ 0: the loss would be log 2 forever and gradients would vanish.
+
+**Budget.** Standard: 1 epoch over the filtered 1,500-pair file (~1,446 pairs → ~91 updates).
+β forks: first 600 filtered pairs (38 updates). Length-balanced: 1 epoch over the filtered
+balanced file, with the same settings as standard. So standard and β forks have **different budgets**
+(manual requires saying so); standard and length-balanced are matched.
+
+**Logged per update** (`train_log.jsonl`): loss, train preference accuracy, chosen/rejected implicit
+rewards β(log πθ − log πref), pre-clip grad norm, skipped-overflow flag, lr, elapsed time, peak VRAM.
+
+**Decision record — long prompts**
+- *Decision:* skip pairs whose prompt alone is ≥ 768 tokens (standard train 54/1500, balanced train
+  58/1500, held-out 10/300, stratified 9/246); save the excluded IDs.
+- *Reason:* released `max_sequence_length: 768` plus the released `encode_prompt_response`, which
+  refuses rather than truncates such prompts; approved by the student 2026-10-07.
+- *Constraint:* config constants unchanged; the same rule applies to every condition and eval set.
+- *Expected effect:* slightly smaller fixed sets (~4%), biased toward excluding very long prompts.
+- *Validation:* `dropped_long_prompts.json` in every run; counts appear in each manifest.
+
+**Decision record — fp16 on T4**
+- *Decision:* GradScaler (dynamic loss scaling) for training; the LoRA weights are fp32.
+- *Reason:* T4 has no bf16; fp16 activation gradients can underflow. PEFT keeps LoRA weights in
+  fp32 over the fp16 base (asserted at start).
+- *Effect:* mathematically the same objective; overflow steps are skipped and counted
+  (`step_skipped_overflow`).
+
+**Decision record — shuffle generator**
+- A `torch.Generator` seeded with the config seed drives the DataLoader shuffle, so every condition
+  sees the same example order regardless of other RNG use.
+
+---
+
+## 5. Task 1 evaluation protocol — `task1_dpo/evaluate.py`
+
+Same protocol for every condition (SFT, standard, β forks, length-balanced):
+
+| Quantity | How | File |
+|---|---|---|
+| Held-out DPO loss / preference accuracy | teacher forcing on the filtered `dpo_standard_eval`; m > 0 with reference adjustment; loss at the run's own β | `pairs_heldout.jsonl` |
+| Length-stratified accuracy | same, on `dpo_length_stratified_eval`, split by `length_stratum` | `pairs_length_stratified.jsonl` |
+| KL from the reference | sample one response per held-out prompt (T=0.7, top-p 0.9, max 256 new tokens, seed reset), then Σ(log πθ − log πref) over response tokens; primary = token mean over all tokens (course helper convention), also the per-sequence mean | `generations_heldout.jsonl` |
+| Reward-model score | course RM on the same generated responses | same |
+| Length | response tokens: mean, std, median, IQR; truncation rate | same |
+| Word-limit compliance | 10 fixed prompts × 5 samples, same decoding; `word_count ≤ parsed limit` | `generations_word_limit.jsonl` |
+
+**SFT note:** with no adapter the policy *is* the reference, so m = 0 (accuracy 0 by the strict
+m > 0 rule, loss = log 2) and KL = 0 by definition. SFT is useful for reward, length, and
+word-limit baselines only.
+
+**Decision record — 5 samples per word-limit prompt:** the prompt set is fixed at 10 prompts; one
+sample each would make compliance move in steps of 10%. Five samples under the same decoding
+lower the variance without changing the prompt set or decoding settings.

@@ -19,7 +19,7 @@
 | 2 PPO | `task2_ppo/ppo.py:56` | `torch.maximum(surr1, surr2)` (pessimistic bound inverted) | `min(ρA, clip(ρ)A)` |
 | 3 GRPO | `task3_grpo/grpo.py:15-17` | mean/std over the whole batch, ignores `group_ids` | per-prompt-group mean/std: `(r_k − μ_group)/(σ_group + ε)` |
 
-All 9 objective tests fail 7/9 on the starter code and pass 9/9 after correction (verified locally on CPU, 2026-10-07).
+Of the 9 objective tests, 7 fail on the starter code; all 9 pass after correction (verified locally on CPU, 2026-10-07).
 
 Other items to verify (not confirmed defects):
 - `common.metrics.preference_accuracy(a, b)` has no reference term; it must be called with reference-adjusted log-ratios.
@@ -29,6 +29,8 @@ Other items to verify (not confirmed defects):
 
 ## Task 1
 - [x] objective validated
+- [x] training loop, evaluation, beta/length orchestration, summary written (untested on GPU until the Colab smoke run)
+- [ ] Colab smoke run passes
 - [ ] standard DPO (1 epoch)
 - [ ] beta study (0.03 / 0.10 / 0.30, 600 examples each)
 - [ ] length-balanced DPO + stratified eval + word-limit compliance
