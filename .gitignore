@@ -28,3 +28,13 @@ data/*
 # Misc
 *.zip
 .DS_Store
+
+# Weights / large binaries (manual appendix)
+*.pt
+*.pth
+*.safetensors
+*.bin
+
+# Secrets
+.env
+*.env
