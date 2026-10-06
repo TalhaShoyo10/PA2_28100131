@@ -52,8 +52,10 @@ def ppo_policy_loss(new_logp, old_logp, advantage, mask, eps=0.2):
     surr1 = ratio * advantage
     surr2 = ratio.clamp(1.0 - eps, 1.0 + eps) * advantage
 
-    # Starter implementation: students must validate the clipping geometry carefully.
-    objective = torch.maximum(surr1, surr2)
+    # Manual p.5: L_clip = E_t[min(rho_t A_t, clip(rho_t, 1-eps, 1+eps) A_t)].
+    # FIX: the starter took the maximum, an optimistic bound that removes the trust region
+    # (unbounded gain for A>0, and ignores clipping protection for A<0).
+    objective = torch.minimum(surr1, surr2)
 
     loss = -masked_mean(objective, mask)
     affected = ((ratio < (1.0 - eps)) | (ratio > (1.0 + eps))).float()
