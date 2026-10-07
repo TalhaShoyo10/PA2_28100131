@@ -95,7 +95,7 @@ def generate(policy, tokenizer, messages, cfg, max_new_tokens: int):
 
 
 @torch.no_grad()
-def evaluate_rl_policy(policy, tokenizer, reward_bundle, rows, cfg, has_adapter: bool, max_new_tokens: int, gen_batch: int = 16):
+def evaluate_rl_policy(policy, tokenizer, reward_bundle, rows, cfg, has_adapter: bool, max_new_tokens: int, gen_batch: int = 16, progress=None):
     """Common held-out protocol: one sampled response per prompt (seed reset), learned reward,
     sampled KL to the reference, sampled-token entropy, and length statistics."""
     lens = [prompt_length(tokenizer, r) for r in rows]
@@ -123,7 +123,10 @@ def evaluate_rl_policy(policy, tokenizer, reward_bundle, rows, cfg, has_adapter:
                 "neg_logp_sum": float((-pol[j] * m).sum()),
                 "tokens": float(m.sum()),
             })
-        print(f"  evaluated {min(start + gen_batch, len(order))}/{len(order)}", flush=True)
+        done = min(start + gen_batch, len(order))
+        print(f"  evaluated {done}/{len(order)}", flush=True)
+        if progress is not None:
+            progress(done, len(order))  # keeps the run's heartbeat fresh for other Colab accounts
     return records
 
 

@@ -47,7 +47,8 @@ def evaluate_policy(config_path: str, adapter: str | None, name: str, limit: int
         save_json(record.dir / "dropped_long_prompts.json", dropped)
         policy = load_policy(cfg, adapter_path=adapter, trainable=False)
         reward = load_reward_model(cfg)
-        recs = evaluate_rl_policy(policy, tok, reward, rows, cfg, has_adapter=adapter is not None, max_new_tokens=max_new)
+        recs = evaluate_rl_policy(policy, tok, reward, rows, cfg, has_adapter=adapter is not None, max_new_tokens=max_new,
+                                  progress=lambda i, n: record.heartbeat(update=i, of=n))
         write_jsonl(record.dir / "generations_heldout.jsonl", recs)
         metrics = dict(summarize_rl_eval(recs), policy=name, adapter=adapter, excluded_long_prompts=len(dropped))
         record.finish(metrics, artifacts={"generations_heldout": "generations_heldout.jsonl"})
