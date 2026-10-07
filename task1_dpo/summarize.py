@@ -51,6 +51,11 @@ def build_summary(cfg) -> pd.DataFrame:
             # Overflow updates (skipped by GradScaler) have a non-finite norm; average the rest.
             "train_grad_norm_mean_finite": _finite_mean([r["grad_norm_preclip"] for r in log]),
             "train_updates_skipped_overflow": sum(bool(r["step_skipped_overflow"]) for r in log),
+            # clip_grad_norm_ rescales whenever the pre-clip norm exceeds max_grad_norm (config: 1.0)
+            "train_fraction_updates_grad_clipped": _finite_mean([
+                float(r["grad_norm_preclip"] > float(cfg["max_grad_norm"]))
+                for r in log if not r["step_skipped_overflow"]
+            ]),
             "train_skipped_update_indices": [r["update"] for r in log if r["step_skipped_overflow"]],
         }
 
