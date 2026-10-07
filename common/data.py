@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Iterable
 
@@ -33,6 +34,13 @@ def load_yaml(path: str | Path) -> dict:
         base_path = repo_path(cfg["base_config"])
         base = yaml.safe_load(base_path.read_text(encoding="utf-8"))
         cfg = _deep_merge(base, {k: v for k, v in cfg.items() if k != "base_config"})
+    # On Colab, results are written to the shared Drive folder rather than the git checkout
+    # (whose results/ holds the committed snapshot): results/<x> -> $PA2_RESULTS_ROOT/<x>.
+    root = os.environ.get("PA2_RESULTS_ROOT")
+    if root and isinstance(cfg.get("results_dir"), str):
+        parts = Path(cfg["results_dir"]).parts
+        if parts and parts[0] == "results":
+            cfg["results_dir"] = str(Path(root, *parts[1:]))
     return cfg
 
 
