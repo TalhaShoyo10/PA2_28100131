@@ -81,12 +81,17 @@ def learned_rewards(reward_bundle, prompts, responses, terminated, cfg):
 
 def generate(policy, tokenizer, messages, cfg, max_new_tokens: int):
     g = cfg["generation"]
-    return batch_generate(
+    gen = batch_generate(
         policy, tokenizer, messages,
         max_prompt_length=int(cfg["max_prompt_length"]),
         max_new_tokens=int(max_new_tokens),
         temperature=float(g["temperature"]), top_p=float(g["top_p"]), do_sample=bool(g["do_sample"]),
     )
+    # batch_generate runs under torch.inference_mode(); its tensors cannot enter an autograd graph.
+    # Cloning outside inference mode gives ordinary tensors with identical values.
+    for key in ("sequences", "attention_mask", "response_ids", "response_mask"):
+        gen[key] = gen[key].clone()
+    return gen
 
 
 @torch.no_grad()
