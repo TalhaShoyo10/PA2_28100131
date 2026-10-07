@@ -213,22 +213,26 @@ def value_parameter_groups(model, lora_lr: float, head_lr: float):
 
 
 def token_values(value_model, input_ids, attention_mask):
-    backbone = getattr(value_model, value_model.base_model_prefix)
+    # Unwrap PEFT to the transformers classifier, then take its transformer body (Qwen2Model).
+    # For a PeftModel, getattr(value_model, "model") resolves to the full classifier instead, whose
+    # forward would also run the score head internally.
+    base = value_model.get_base_model() if hasattr(value_model, "get_base_model") else value_model
+    backbone = getattr(base, base.base_model_prefix)
     outputs = backbone(
         input_ids=input_ids,
         attention_mask=attention_mask,
-        output_hidden_states=True,
         return_dict=True,
         use_cache=False,
     )
-    hidden = outputs.hidden_states[-1]
+    hidden = outputs.last_hidden_state  # final-norm output, identical to hidden_states[-1]
     if hasattr(value_model, "score"):
         head = value_model.score
     elif hasattr(value_model, "classifier"):
         head = value_model.classifier
     else:
         raise RuntimeError("Could not locate scalar value head")
-    return head(hidden).squeeze(-1)
+    # The trainable head may be kept in fp32 over an fp16 backbone; match its dtype.
+    return head(hidden.to(next(head.parameters()).dtype)).squeeze(-1)
 
 
 def trainable_parameters(model):

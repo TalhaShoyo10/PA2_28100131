@@ -102,10 +102,13 @@ Pairs whose prompt alone is at least `max_sequence_length` (768) tokens are excl
 ### Task 2 - PPO
 
 ```bash
-python -m task2_ppo.continue_train --config configs/ppo.yaml --run-name standard
+python -m task2_ppo.analyze_clipping --config configs/ppo.yaml --part cached       # Step 2a: cached-batch geometry
+python -m task2_ppo.continue_train --config configs/ppo.yaml --run-name standard     # Step 1: 20 updates
 python -m task2_ppo.evaluate --config configs/ppo.yaml --adapter outputs/task2_ppo/standard --name standard
-python -m task2_ppo.analyze_clipping --config configs/ppo.yaml
-python -m task2_ppo.ablate_kl --config configs/ppo.yaml
+python -m task2_ppo.evaluate --config configs/ppo.yaml --adapter checkpoints/ppo_midpoint_policy --name midpoint
+python -m task2_ppo.analyze_clipping --config configs/ppo.yaml --part forks        # Step 2b: eps forks (or --only <eps>)
+python -m task2_ppo.ablate_kl --config configs/ppo.yaml                            # Step 3: beta_KL forks (or --only <beta>)
+python -m task2_ppo.summarize --config configs/ppo.yaml                            # summary.csv, standard_trajectory.csv, cached_clipping.csv
 ```
 
 ### Task 3 - GRPO

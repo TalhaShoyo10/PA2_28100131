@@ -150,3 +150,57 @@ word-limit baselines only.
 **Decision record — 5 samples per word-limit prompt:** the prompt set is fixed at 10 prompts; one
 sample each would make compliance move in steps of 10%. Five samples under the same decoding
 lower the variance without changing the prompt set or decoding settings.
+
+---
+
+## 6. PPO continuation — `task2_ppo/continue_train.py::run_ppo`
+
+**One update** (config: 1 prompt per update, 2 PPO epochs; see learning_guide §2.3 for the walk-through):
+
+| Step | Code | Tensors |
+|---|---|---|
+| prompt | `common.rl.prompt_schedule` — seeded permutation of the filtered training pool; every condition uses the same list (forks see its first 8) | — |
+| rollout | `common.rl.generate` (T=0.7, top-p 0.9, ≤512 new tokens) | `sequences [1, P+T]`, `response_mask [1, T]` |
+| frozen stats | `policy_and_reference_logprobs` (adapter on / off), `response_values` | `old_logp, ref_logp, values [1, T]` |
+| reward | course RM; minus `missing_eos_penalty` (1.0) if no EOS | scalar |
+| shaping | `shaped_rewards`: −βKL(log π_old − log ref) per token + reward on the last valid token | `[1, T]` |
+| credit | `compute_gae(γ=1, λ=0.95)` → advantages, returns; `normalize_advantages` whitens over the rollout's tokens | `[1, T]` |
+| optimize ×2 | policy: `ppo_policy_loss` (clipped, ε); critic: `value_mse_loss(V_new, returns)`; loss = policy + 0.5·value; one GradScaler, two optimizers, grad-norm clip 1.0 each | — |
+
+**Value alignment.** V(s_t) is the critic output at the last token *before* response token t (position P−1+t),
+the same offset used for the log-probs (`logits[:, P−1:−1]`).
+
+**Decision records**
+- *Dropout disabled* in the policy and critic during RL (`common.rl.disable_dropout`): π_old and π_θ are then the
+  same function before the first step, so ρ = 1 exactly and the clip fraction measures real policy movement,
+  not dropout noise.
+- *Advantage whitening per rollout*, using the release's `normalize_advantages` helper. With one rollout per
+  update, about half of the tokens get negative advantage even for a high-reward response; the learned signal is
+  *relative* within the response. This is the standard implementation; note it when interpreting.
+- *Critic weights in fp32* (LoRA and score head) over the fp16 0.5B backbone; `common.models.token_values` was
+  fixed to unwrap PEFT to the transformer body (the original resolution ran the classifier head internally,
+  which breaks with an fp32 head). The values computed are mathematically unchanged.
+- *Prompt filter*: training/eval prompts longer than `max_prompt_length` (256) are skipped (train 256/1200,
+  eval 35/200), same rule as Task 1, because generation would right-truncate them and cut the assistant header.
+- *Shared fork*: ε = 0.20 with βKL = 0.10 is the configuration of both the default clipping fork and the default
+  KL fork, so it is run once (`fork_eps020_kl010`).
+
+**Logged per update** (`train_log.jsonl`): effective/raw reward, KL to the reference (sampled token mean),
+entropy (sampled), policy/value loss, clip fraction (mean and last epoch), approx-KL(π_old→π_new), ratio
+extremes, grad norms, critic explained variance vs. returns, response length, EOS/truncation, cumulative
+generated tokens, elapsed time, peak VRAM.
+
+## 7. Cached clipping study — `task2_ppo/analyze_clipping.py`
+
+- Rebuilds the 32 supplied rollouts as token sequences. Re-tokenizing the stored text reproduces the cached token
+  count for all 32 (checked locally); `step0_check.json` compares the midpoint's log-probs with the cached ones.
+- Advantages exactly as in training (shaping with the config βKL, GAE on the cached critic values, whitening).
+- For each ε: fresh midpoint copy, 2 epochs over the batch, one optimizer step per rollout, same order. Before each
+  step it records:
+  - **clip fraction**: ρ outside [1−ε, 1+ε] (manual p.3);
+  - **affected-token fraction**: tokens where the clipped term is the active minimum, i.e. (A>0 and ρ>1+ε) or
+    (A<0 and ρ<1−ε); these tokens get zero gradient;
+  - unclipped vs clipped surrogate, and ratio extremes.
+  A final pass reports the same quantities for the end-of-batch policy.
+- *Why not just evaluate the midpoint on its own batch?* Then every ratio is exactly 1, so every ε clips 0%. ε can
+  only matter once the policy has moved inside the batch, which is what this protocol measures.

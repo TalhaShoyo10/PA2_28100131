@@ -13,7 +13,7 @@ import torch
 import torch.nn.functional as F
 
 from task1_dpo.dpo import dpo_loss
-from task2_ppo.ppo import ppo_policy_loss
+from task2_ppo.ppo import compute_gae, ppo_policy_loss, shaped_rewards
 from task3_grpo.grpo import group_relative_advantages
 
 
@@ -90,6 +90,34 @@ def test_ppo_clip_fraction_counts_tokens_outside_band_under_mask():
     mask = t(1.0, 1.0, 1.0, 0.0).unsqueeze(0)  # last token is padding
     _, _, frac = ppo_policy_loss(new_logp, torch.zeros_like(new_logp), torch.ones_like(new_logp), mask, eps=0.2)
     assert math.isclose(frac.item(), 2.0 / 3.0, rel_tol=1e-6), frac
+
+
+def test_shaped_rewards_kl_cost_per_token_plus_terminal_reward():
+    # learning_guide.md 3.3: log pi - log ref = [0.5, 0.1, -0.2], beta_kl = 0.1, RM = 1.0
+    policy = t(0.5, 0.1, -0.2, 9.0).unsqueeze(0)
+    ref = torch.zeros_like(policy)
+    mask = t(1.0, 1.0, 1.0, 0.0).unsqueeze(0)  # 4th position is padding
+    r = shaped_rewards(t(1.0), policy, ref, mask, beta_kl=0.1)
+    assert torch.allclose(r, t(-0.05, -0.01, 1.02, 0.0).unsqueeze(0), atol=1e-6), r
+
+
+def test_gae_matches_hand_computation_and_ignores_padding():
+    # learning_guide.md 3.3: gamma = 1, lambda = 0.95
+    rewards = t(-0.05, -0.01, 1.02, 0.0).unsqueeze(0)
+    values = t(0.6, 0.8, 0.9, 5.0).unsqueeze(0)  # value at the padded position must be ignored
+    mask = t(1.0, 1.0, 1.0, 0.0).unsqueeze(0)
+    adv, ret = compute_gae(rewards, values, mask, gamma=1.0, lam=0.95)
+    assert torch.allclose(adv[0, :3], t(0.3438, 0.204, 0.12), atol=1e-4), adv
+    assert adv[0, 3].item() == 0.0
+    assert torch.allclose(ret[0, :3], t(0.9438, 1.004, 1.02), atol=1e-4), ret
+
+
+def test_gae_with_lambda_one_is_return_minus_value():
+    rewards = t(-0.05, -0.01, 1.02).unsqueeze(0)
+    values = t(0.6, 0.8, 0.9).unsqueeze(0)
+    adv, _ = compute_gae(rewards, values, torch.ones_like(rewards), gamma=1.0, lam=1.0)
+    # Monte-Carlo: A_t = sum_{k>=t} r_k - V_t
+    assert torch.allclose(adv, t(0.96 - 0.6, 1.01 - 0.8, 1.02 - 0.9).unsqueeze(0), atol=1e-5), adv
 
 
 # --------------------------------------------------------------------------------------

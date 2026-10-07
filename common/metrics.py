@@ -51,6 +51,18 @@ def word_limit_compliance(prompt: str, response: str):
     return float(word_count(response) <= limit)
 
 
+def length_stats(values) -> dict:
+    """Mean plus dispersion statistics (manual p.3: report mean and std or IQR)."""
+    a = np.asarray(values, dtype=float)
+    if a.size == 0:
+        return {"n": 0}
+    q25, q50, q75 = np.percentile(a, [25, 50, 75])
+    return {
+        "n": int(a.size), "mean": float(a.mean()), "std": float(a.std()), "median": float(q50),
+        "q25": float(q25), "q75": float(q75), "iqr": float(q75 - q25), "max": float(a.max()),
+    }
+
+
 def safe_corr(a, b):
     a = np.asarray(a, dtype=float)
     b = np.asarray(b, dtype=float)

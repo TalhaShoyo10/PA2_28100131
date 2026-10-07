@@ -40,7 +40,9 @@ Other items to verify (not confirmed defects):
 - [ ] qualitative evidence
 
 ## Task 2
-- [x] objective validated
+- [x] objective validated (+ GAE and KL-shaping tests)
+- [x] continuation loop, evaluation, cached clipping study, clip/KL forks, summary written (untested on GPU until the Colab smoke run)
+- [ ] Colab smoke run passes
 - [ ] standard 20-update continuation (+ VRAM, wall time)
 - [ ] cached clipping diagnostic + matched 8-update forks (ε 0.05/0.20/0.50)
 - [ ] KL forks (βKL 0/0.10/0.20)
