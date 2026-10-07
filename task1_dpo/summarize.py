@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 
 import pandas as pd
 
@@ -23,6 +24,11 @@ def _done_runs(results_dir, prefix):
         if json.loads((d / "status.json").read_text(encoding="utf-8"))["state"] != "done":
             continue
         yield d
+
+
+def _finite_mean(values):
+    finite = [float(v) for v in values if math.isfinite(float(v))]
+    return sum(finite) / len(finite) if finite else float("nan")
 
 
 def build_summary(cfg) -> pd.DataFrame:
@@ -42,7 +48,10 @@ def build_summary(cfg) -> pd.DataFrame:
             "train_loss_last5_mean": metrics["mean_train_loss_last_5_updates"],
             "train_wall_clock_s": manifest.get("wall_clock_seconds"),
             "train_peak_vram_gib": manifest.get("peak_vram_allocated_gib"),
-            "train_grad_norm_mean": sum(r["grad_norm_preclip"] for r in log) / len(log),
+            # Overflow updates (skipped by GradScaler) have a non-finite norm; average the rest.
+            "train_grad_norm_mean_finite": _finite_mean([r["grad_norm_preclip"] for r in log]),
+            "train_updates_skipped_overflow": sum(bool(r["step_skipped_overflow"]) for r in log),
+            "train_skipped_update_indices": [r["update"] for r in log if r["step_skipped_overflow"]],
         }
 
     rows = []
