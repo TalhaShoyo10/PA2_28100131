@@ -37,6 +37,12 @@ Other items to verify (not confirmed defects):
 - [x] SFT evaluated under the same protocol (additional reference point)
 - [x] required metrics — `results/task1_dpo/summary.csv`; all 13 runs on commit c526ffb, validated by `scripts.validate_results`
 - Note: grad-norm clipping (max 1.0) active on 0% of beta003 updates and 100% of all other runs' updates
+- Audit (2026-10-07, no rerun needed): identical eval items across all conditions; no degenerate generations.
+  Reporting caveats:
+  - training responses truncated to fit 768 tokens: standard chosen 11.9% / rejected 9.2%, balanced ~2.2%
+    (a confounder for standard vs length-balanced);
+  - 8/290 held-out pairs have a response cut to <=2 tokens by a near-limit prompt;
+  - ~42% of generations hit the 256-token cap in every condition.
 - [ ] qualitative evidence
 
 ## Task 2
