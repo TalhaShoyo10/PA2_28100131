@@ -75,9 +75,14 @@ def rebuild_batch(cfg, tokenizer, rows):
         if pr is None:
             rejected.append({"cache_index": i, "reason": "prompt_id not in prompt pools"})
             continue
-        # No generation happens here, so the rollout-time prompt-length filter does not apply:
-        # every supplied rollout is used with its full prompt (step0_check.json shows the match).
         prompt_ids = tokenizer.apply_chat_template(prompt_messages(pr), tokenize=True, add_generation_prompt=True)
+        # The course generated these rollouts with prompts capped at max_prompt_length, so a longer prompt
+        # was truncated at rollout time and cannot be rebuilt faithfully. The first cached run
+        # (task2_ppo_cached_clipping_seed6304, kept as evidence) included them; its step0_check.json
+        # showed exactly these rollouts (cache 1, 4, 11) mismatching by up to 20 nats.
+        if len(prompt_ids) > int(cfg["max_prompt_length"]):
+            rejected.append({"cache_index": i, "reason": f"prompt {len(prompt_ids)} tokens > rollout cap {cfg['max_prompt_length']}"})
+            continue
         resp_ids = tokenizer(r["response"], add_special_tokens=False)["input_ids"]
         if r.get("terminated_with_eos"):
             resp_ids = resp_ids + [tokenizer.eos_token_id]
@@ -142,7 +147,7 @@ def _pool(stats):
 
 def cached_study(config_path: str):
     cfg = load_yaml(config_path)
-    exp_id = experiment_id("task2_ppo", "cached_clipping", int(cfg["seed"]))
+    exp_id = experiment_id("task2_ppo", "cached_clipping_valid", int(cfg["seed"]))
     record = RunRecord(cfg["results_dir"], exp_id, cfg, extra={
         "task": "task2_ppo", "condition": "cached_clipping", "checkpoint": cfg["paths"]["ppo_midpoint_policy"],
         "cache": cfg["cached_rollouts"], "epsilons": cfg["clip_values"], "ppo_epochs": int(cfg["ppo_epochs"]),
@@ -181,6 +186,8 @@ def cached_study(config_path: str):
                     "fraction_tokens_abs_logratio_gt_0.01": float((allp > 0.01).float().mean()),
                 })
 
+            with torch.no_grad():
+                step0 = [_geometry(_new_logp(policy, it, device), it["old"].to(device), it["adv"].to(device), eps) for it in items]
             step_stats = []
             for epoch in range(int(cfg["ppo_epochs"])):
                 for it in items:
@@ -200,6 +207,7 @@ def cached_study(config_path: str):
             with torch.no_grad():
                 final = [_geometry(_new_logp(policy, it, device), it["old"].to(device), it["adv"].to(device), eps) for it in items]
             results[f"{eps:.2f}"] = {
+                "step0_supplied_batch": _pool(step0),
                 "during_updates_epoch1": _pool([s for s in step_stats if s["epoch"] == 0]),
                 "during_updates_epoch2": _pool([s for s in step_stats if s["epoch"] == 1]),
                 "end_of_batch_policy": _pool(final),

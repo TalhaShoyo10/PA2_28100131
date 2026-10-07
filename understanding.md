@@ -204,3 +204,27 @@ generated tokens, elapsed time, peak VRAM.
   A final pass reports the same quantities for the end-of-batch policy.
 - *Why not just evaluate the midpoint on its own batch?* Then every ratio is exactly 1, so every ε clips 0%. ε can
   only matter once the policy has moved inside the batch, which is what this protocol measures.
+
+**Anomaly record — cached clipping study, first run (`task2_ppo_cached_clipping_seed6304`, kept as evidence)**
+- *Observed:* approx-KL(old→new) = 0.0286 and ratio extremes 32.6 / 2e-9 were identical for every ε, both epochs,
+  and the end-of-batch policy, so the numbers did not reflect PPO updates.
+- *Diagnosis:* `step0_check.json`. 29 rollouts match the midpoint within numerical noise (mean |Δlog p| 0.003–0.05,
+  max ≤ 0.39). The 3 rollouts with prompts longer than the 256-token rollout cap (cache 1, 4, 11: 739/390/521
+  tokens) mismatch by up to 20 nats: the course generated them from a truncated prompt, which cannot be rebuilt.
+  Including them was my error.
+- *Correction:* the rebuild applies the rollout-cap validity rule (decided by reconstruction, not by outcomes) and
+  the study runs under a new ID, `task2_ppo_cached_clipping_valid_seed6304`, with 29 rollouts. It also adds a
+  `step0_supplied_batch` phase: the clip and affected fractions of each ε on the supplied ratio distribution before
+  any update. That is the purest "immediate geometric effect", because only ε changes.
+- *Origin of the step-0 ratio spread:* cached old log-probs were recorded at rollout time with different
+  batching and precision than the training-time recompute. That spread (~1.7% mean per token) is what ε acts
+  on in the step-0 phase.
+
+**Observation — clipping forks are identical.** All three ε forks have bit-identical training and evaluation numbers.
+The largest ratio in any fork was 1.03, so no token ever left even [0.95, 1.05]; clipping never activated, and the
+updates were mathematically identical. Under the released settings (lr 3e-6, 1 rollout per update, 2 epochs) the
+policy moves too little per update for ε ∈ {0.05, 0.2, 0.5} to bind within 8 updates. This is a result, not a bug.
+
+**fp16 overflow skips (Task 2).** Standard: 4 of 40 optimizer steps (update 2 one step, update 3 both, update 14 one);
+forks: 3 of 16 each, with the same early pattern (the loss scaler calibrating from 65536). The pattern is identical
+across forks, so comparisons stay matched; report the counts.

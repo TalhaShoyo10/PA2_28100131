@@ -94,7 +94,7 @@ def build(cfg):
         traj = pd.DataFrame([{k: v for k, v in r.items() if k != "epochs"} for r in read_jsonl(std_dir / "train_log.jsonl")])
 
     cached = None
-    cdir = repo_path(cfg["results_dir"]) / f"task2_ppo_cached_clipping_seed{seed}"
+    cdir = repo_path(cfg["results_dir"]) / f"task2_ppo_cached_clipping_valid_seed{seed}"
     if (cdir / "metrics.json").exists():
         m = json.loads((cdir / "metrics.json").read_text(encoding="utf-8"))
         cached = pd.DataFrame([
