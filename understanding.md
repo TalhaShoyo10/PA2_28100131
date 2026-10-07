@@ -228,3 +228,53 @@ policy moves too little per update for ε ∈ {0.05, 0.2, 0.5} to bind within 8 
 **fp16 overflow skips (Task 2).** Standard: 4 of 40 optimizer steps (update 2 one step, update 3 both, update 14 one);
 forks: 3 of 16 each, with the same early pattern (the loss scaler calibrating from 65536). The pattern is identical
 across forks, so comparisons stay matched; report the counts.
+
+---
+
+## 8. GRPO continuation — `task3_grpo/continue_train.py::run_grpo`
+
+| Step | Code | Tensors |
+|---|---|---|
+| prompt | same seeded schedule and filtered pool as PPO (`common.rl.prompt_schedule`) | — |
+| group | `generate` with the prompt repeated K = 4 times (sampling makes them differ) | `sequences [4, P+T]` |
+| frozen stats | `policy_and_reference_logprobs`; RM reward per completion (no EOS penalty: the GRPO config defines none) | `old, ref [4, T]`, `r [4]` |
+| advantage | `group_relative_advantages(r, group_ids = 0)` → (r − mean)/(std + 1e-6) | `A [4]` |
+| truncation mask | `mask_truncated_sequences`: completions that hit 512 tokens get an all-zero loss mask (they still count in the group mean/std) | `mask [4, T]` |
+| loss | `grpo_policy_loss(…, loss_type)`: clipped ratio × A over tokens, normalized per sequence by T_k (`grpo`) or 512 (`dr_grpo`), + β·KL (k3) | scalar |
+
+`policy_epochs = 1` and dropout is off, so the single step has ratio = 1 exactly: clipping cannot activate in GRPO's own
+updates under this config (the log will show clip fraction 0). Each update is a pure group-relative policy-gradient step
+plus the KL pull.
+
+**Logged** (`train_log.jsonl`): mean reward, within-group reward std, uninformative flag (std ≤ 1e-6), KL to the reference
+(sampled token mean over all generated tokens, same helper as Tasks 1–2), entropy, mean length, truncated count, loss,
+policy term, k3 KL term, clip fraction, grad norm, overflow skips, cumulative generated tokens, time, VRAM.
+Per completion (`completions.jsonl`): length, truncation/mask status, reward, advantage, analytic gradient weights.
+
+**Length-conditioned statistic (normalization study).** At ratio = 1 the gradient weight on each token of completion k
+is |A_k| / N_k, with N_k = T_k (canonical) or 512 (Dr-GRPO):
+- per-token weight: canonical ∝ 1/T_k (short completions' tokens weigh more); Dr-GRPO constant;
+- per-sequence total: canonical |A_k| (equal for every length); Dr-GRPO |A_k|·T_k/512 (grows with length).
+`task3_grpo/summarize.py` splits each fork's completions at their median length (fixed rule) and reports the share of
+total weight on long completions, the long/short per-token weight ratio, mean advantage per length half, and
+corr(length, advantage).
+
+**Decision records**
+- *GradScaler starts at 2^12* instead of 65536: Task 2 lost its first steps to scaler calibration, and GRPO has only
+  20 single-step updates. Identical for every GRPO condition.
+- *Evaluation cap = max_completion_length (512)*: the GRPO config defines no separate evaluation cap (Task 2's 768
+  comes from its own config).
+- *Uninformative tolerance 1e-6* = the release advantage helper's eps.
+
+## 9. Group-size study — `task3_grpo/analyze_group_size.py`
+
+- **Regrouping rule (fixed before any result):** each prompt's 8 cached completions, ordered by `generation_index`,
+  are split into 8/K consecutive disjoint groups: K = 2 → 96 groups, K = 4 → 48, K = 8 → 24. All use the same 192
+  generations from the same 24 prompts, so the generation budget is equal by construction.
+- **Difficulty bins (fixed rule):** prompt difficulty = mean reward over its 8 cached completions; tertiles → hard /
+  medium / easy (8 prompts each).
+- **Reported per K and per bin:** informative-group rate, mean and median within-group std, variance of normalized
+  advantages, variance of centred rewards (r − group mean; the unnormalized relative signal), mean |A|, fraction of
+  completions with non-zero advantage.
+- **Note:** rewards are continuous RM scores, so exact zero-std groups will be rare (the midpoint metadata reports 2%).
+  The *size* of the within-group spread carries most of the information.

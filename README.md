@@ -114,10 +114,12 @@ python -m task2_ppo.summarize --config configs/ppo.yaml                         
 ### Task 3 - GRPO
 
 ```bash
-python -m task3_grpo.continue_train --config configs/grpo.yaml --run-name standard
+python -m task3_grpo.continue_train --config configs/grpo.yaml --run-name standard     # Step 1: 20 updates, K = 4
 python -m task3_grpo.evaluate --config configs/grpo.yaml --adapter outputs/task3_grpo/standard --name standard
-python -m task3_grpo.analyze_group_size --config configs/grpo.yaml
-python -m task3_grpo.compare_normalization --config configs/grpo.yaml
+python -m task3_grpo.evaluate --config configs/grpo.yaml --adapter checkpoints/grpo_midpoint_policy --name midpoint
+python -m task3_grpo.analyze_group_size --config configs/grpo.yaml                     # Step 2: K = 2/4/8 from the cache
+python -m task3_grpo.compare_normalization --config configs/grpo.yaml                  # Step 3: grpo vs dr_grpo forks (or --only)
+python -m task3_grpo.summarize --config configs/grpo.yaml
 ```
 
 ### Task 4 - Safety calibration

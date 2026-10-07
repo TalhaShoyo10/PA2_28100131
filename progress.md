@@ -47,8 +47,8 @@ Other items to verify (not confirmed defects):
 
 ## Task 2
 - [x] objective validated (+ GAE and KL-shaping tests)
-- [x] continuation loop, evaluation, cached clipping study, clip/KL forks, summary written (untested on GPU until the Colab smoke run)
-- [ ] Colab smoke run passes
+- [x] continuation loop, evaluation, cached clipping study, clip/KL forks, summary written
+- [x] all runs done on Colab: standard, midpoint eval, cached_clipping_valid (29/32 rollouts), 5 forks — results on Drive, not yet committed
 - [ ] standard 20-update continuation (+ VRAM, wall time)
 - [ ] cached clipping diagnostic + matched 8-update forks (ε 0.05/0.20/0.50)
 - [ ] KL forks (βKL 0/0.10/0.20)
@@ -56,6 +56,8 @@ Other items to verify (not confirmed defects):
 
 ## Task 3
 - [x] objective validated
+- [x] continuation loop, evaluation, group-size study, normalization forks, summary written (untested on GPU until the Colab smoke run)
+- [ ] Colab smoke run passes
 - [ ] standard 20-update continuation (+ VRAM, wall time)
 - [ ] K-study from cache (2/4/8, equal generations, difficulty bins fixed once)
 - [ ] canonical vs Dr.-GRPO forks
