@@ -1,0 +1,32 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791329663.869320   15192 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791329668.426102   15192 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+[1/4] held-out pairs
+[2/4] length-stratified pairs
+[3/4] held-out generation
+  generated 16/290
+  generated 32/290
+  generated 48/290
+  generated 64/290
+  generated 80/290
+  generated 96/290
+  generated 112/290
+  generated 128/290
+  generated 144/290
+  generated 160/290
+  generated 176/290
+  generated 192/290
+  generated 208/290
+  generated 224/290
+  generated 240/290
+  generated 256/290
+  generated 272/290
+  generated 288/290
+  generated 290/290
+[4/4] word-limit prompts
+  generated 16/50
+  generated 32/50
+  generated 48/50
+  generated 50/50

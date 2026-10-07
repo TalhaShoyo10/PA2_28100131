@@ -1,0 +1,103 @@
+{
+  "policy": "beta003",
+  "adapter": "/content/PA2/outputs/task1_dpo/beta003",
+  "beta_for_heldout_loss": 0.03,
+  "heldout_pairs": {
+    "n": 290,
+    "dpo_loss": 0.6910036163083438,
+    "preference_accuracy": 0.6379310344827587,
+    "mean_margin": 0.1464840458641792,
+    "median_margin": 0.16252446174621582
+  },
+  "length_stratified_pairs": {
+    "overall": {
+      "n": 237,
+      "dpo_loss": 0.6914817205461269,
+      "preference_accuracy": 0.5654008438818565,
+      "mean_margin": 0.11363574145715448,
+      "median_margin": 0.07684707641601562
+    },
+    "by_stratum": {
+      "length_matched": {
+        "n": 80,
+        "dpo_loss": 0.6918535701930523,
+        "preference_accuracy": 0.575,
+        "mean_margin": 0.08778193220496178,
+        "median_margin": 0.06931734085083008
+      },
+      "preferred_longer": {
+        "n": 78,
+        "dpo_loss": 0.6943796712618607,
+        "preference_accuracy": 0.41025641025641024,
+        "mean_margin": -0.07932305947328225,
+        "median_margin": -0.07845687866210938
+      },
+      "rejected_longer": {
+        "n": 79,
+        "dpo_loss": 0.6882438961463638,
+        "preference_accuracy": 0.7088607594936709,
+        "mean_margin": 0.33033309858056564,
+        "median_margin": 0.29638671875
+      }
+    }
+  },
+  "heldout_generation": {
+    "n_responses": 290,
+    "kl_token_mean": -3.099987308779158e-05,
+    "kl_sequence_mean": -0.004701718682391119,
+    "length_tokens": {
+      "n": 290,
+      "mean": 151.6689655172414,
+      "std": 104.35519947540006,
+      "median": 180.5,
+      "q25": 39.75,
+      "q75": 256.0,
+      "iqr": 216.25,
+      "max": 256.0
+    },
+    "truncation_rate": 0.4206896551724138,
+    "reward_mean": 1.2385569736875337,
+    "reward_std": 1.2202210273777097
+  },
+  "word_limit": {
+    "n_prompts": 10,
+    "samples_per_prompt": 5,
+    "compliance_rate": 0.5,
+    "words": {
+      "n": 50,
+      "mean": 39.4,
+      "std": 19.15306763941484,
+      "median": 31.5,
+      "q25": 26.0,
+      "q75": 48.75,
+      "iqr": 22.75,
+      "max": 97.0
+    },
+    "length_tokens": {
+      "n": 50,
+      "mean": 46.1,
+      "std": 21.204009054893366,
+      "median": 36.5,
+      "q25": 30.0,
+      "q75": 56.75,
+      "iqr": 26.75,
+      "max": 109.0
+    },
+    "per_prompt_compliance": {
+      "wl01": 1.0,
+      "wl02": 0.2,
+      "wl03": 1.0,
+      "wl04": 0.2,
+      "wl05": 0.4,
+      "wl06": 0.6,
+      "wl07": 0.0,
+      "wl08": 0.6,
+      "wl09": 1.0,
+      "wl10": 0.0
+    }
+  },
+  "excluded_long_prompts": {
+    "heldout": 10,
+    "length_stratified": 9
+  }
+}

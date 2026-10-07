@@ -1,0 +1,1 @@
+python -m task1_dpo.train --run-name smoke --max-examples 32

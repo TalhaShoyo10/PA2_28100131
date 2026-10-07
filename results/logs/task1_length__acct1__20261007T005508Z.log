@@ -1,0 +1,151 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791334519.625316   36564 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791334524.347353   36564 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+{
+  "dpo_standard_train": {
+    "n_pairs": 1446,
+    "fraction_chosen_longer": 0.5712309820193637,
+    "fraction_rejected_longer": 0.4142461964038728,
+    "fraction_equal_length": 0.014522821576763486,
+    "mean_chosen_minus_rejected_tokens": 45.905255878284926,
+    "median_chosen_minus_rejected_tokens": 20.0,
+    "corr_length_diff_vs_score_diff": 0.059489551189496934
+  },
+  "dpo_length_train": {
+    "n_pairs": 1442,
+    "fraction_chosen_longer": 0.49029126213592233,
+    "fraction_rejected_longer": 0.48751733703190014,
+    "fraction_equal_length": 0.022191400832177532,
+    "mean_chosen_minus_rejected_tokens": 4.728155339805825,
+    "median_chosen_minus_rejected_tokens": 0.0,
+    "corr_length_diff_vs_score_diff": 0.060418827581652325,
+    "strata_counts": {
+      "length_matched": 482,
+      "preferred_longer": 478,
+      "rejected_longer": 482
+    }
+  }
+}
+[length_balanced] update 1/91 loss 0.6931 acc 0.000 gnorm 1.713 t 10s
+[length_balanced] update 2/91 loss 0.6938 acc 0.438 gnorm 1.899 t 19s
+[length_balanced] update 3/91 loss 0.6952 acc 0.188 gnorm 1.610 t 29s
+[length_balanced] update 4/91 loss 0.6933 acc 0.375 gnorm 1.625 t 39s
+[length_balanced] update 5/91 loss 0.6935 acc 0.312 gnorm 1.827 t 49s
+[length_balanced] update 6/91 loss 0.6932 acc 0.438 gnorm 1.682 t 59s
+[length_balanced] update 7/91 loss 0.6923 acc 0.438 gnorm 1.944 t 67s
+[length_balanced] update 8/91 loss 0.6927 acc 0.625 gnorm 1.498 t 78s
+[length_balanced] update 9/91 loss 0.6900 acc 0.688 gnorm 2.324 t 89s
+[length_balanced] update 10/91 loss 0.6910 acc 0.625 gnorm 1.491 t 100s
+[length_balanced] update 11/91 loss 0.6953 acc 0.500 gnorm 1.959 t 113s
+[length_balanced] update 12/91 loss 0.6904 acc 0.625 gnorm 2.000 t 125s
+[length_balanced] update 13/91 loss 0.6897 acc 0.625 gnorm 1.861 t 135s
+[length_balanced] update 14/91 loss 0.6954 acc 0.500 gnorm 1.724 t 147s
+[length_balanced] update 15/91 loss 0.6901 acc 0.688 gnorm 1.422 t 157s
+[length_balanced] update 16/91 loss 0.6927 acc 0.625 gnorm 1.941 t 168s
+[length_balanced] update 17/91 loss 0.6939 acc 0.438 gnorm 1.638 t 181s
+[length_balanced] update 18/91 loss 0.6936 acc 0.500 gnorm 1.785 t 192s
+[length_balanced] update 19/91 loss 0.6895 acc 0.625 gnorm 1.715 t 203s
+[length_balanced] update 20/91 loss 0.6947 acc 0.438 gnorm nan t 214s
+[length_balanced] update 21/91 loss 0.6915 acc 0.500 gnorm 1.924 t 226s
+[length_balanced] update 22/91 loss 0.6888 acc 0.562 gnorm 1.690 t 238s
+[length_balanced] update 23/91 loss 0.6932 acc 0.500 gnorm 1.343 t 248s
+[length_balanced] update 24/91 loss 0.6929 acc 0.562 gnorm 1.635 t 260s
+[length_balanced] update 25/91 loss 0.6866 acc 0.562 gnorm 1.895 t 271s
+[length_balanced] update 26/91 loss 0.6921 acc 0.562 gnorm 1.503 t 282s
+[length_balanced] update 27/91 loss 0.6898 acc 0.750 gnorm 2.030 t 293s
+[length_balanced] update 28/91 loss 0.6870 acc 0.625 gnorm 2.149 t 306s
+[length_balanced] update 29/91 loss 0.6871 acc 0.688 gnorm 1.715 t 317s
+[length_balanced] update 30/91 loss 0.6872 acc 0.625 gnorm 1.735 t 328s
+[length_balanced] update 31/91 loss 0.6919 acc 0.438 gnorm 1.715 t 337s
+[length_balanced] update 32/91 loss 0.6862 acc 0.688 gnorm 1.891 t 346s
+[length_balanced] update 33/91 loss 0.6852 acc 0.688 gnorm 1.671 t 359s
+[length_balanced] update 34/91 loss 0.6787 acc 0.562 gnorm 2.141 t 371s
+[length_balanced] update 35/91 loss 0.6975 acc 0.438 gnorm 1.918 t 381s
+[length_balanced] update 36/91 loss 0.6827 acc 0.750 gnorm 1.929 t 392s
+[length_balanced] update 37/91 loss 0.6824 acc 0.688 gnorm 1.866 t 403s
+[length_balanced] update 38/91 loss 0.6861 acc 0.625 gnorm 1.740 t 412s
+[length_balanced] update 39/91 loss 0.6952 acc 0.375 gnorm 1.716 t 423s
+[length_balanced] update 40/91 loss 0.6709 acc 0.688 gnorm 2.016 t 436s
+[length_balanced] update 41/91 loss 0.6880 acc 0.562 gnorm 1.819 t 446s
+[length_balanced] update 42/91 loss 0.6844 acc 0.562 gnorm 1.700 t 459s
+[length_balanced] update 43/91 loss 0.6871 acc 0.750 gnorm 1.735 t 468s
+[length_balanced] update 44/91 loss 0.6772 acc 0.625 gnorm 1.680 t 480s
+[length_balanced] update 45/91 loss 0.6880 acc 0.500 gnorm 1.670 t 490s
+[length_balanced] update 46/91 loss 0.7013 acc 0.375 gnorm 1.787 t 502s
+[length_balanced] update 47/91 loss 0.6812 acc 0.812 gnorm 1.666 t 515s
+[length_balanced] update 48/91 loss 0.6684 acc 0.750 gnorm 2.201 t 527s
+[length_balanced] update 49/91 loss 0.6696 acc 0.812 gnorm 2.126 t 538s
+[length_balanced] update 50/91 loss 0.6905 acc 0.562 gnorm 2.214 t 550s
+[length_balanced] update 51/91 loss 0.6747 acc 0.625 gnorm 2.003 t 558s
+[length_balanced] update 52/91 loss 0.6802 acc 0.688 gnorm 1.545 t 570s
+[length_balanced] update 53/91 loss 0.6938 acc 0.500 gnorm 1.744 t 583s
+[length_balanced] update 54/91 loss 0.6752 acc 0.750 gnorm 1.685 t 592s
+[length_balanced] update 55/91 loss 0.6766 acc 0.625 gnorm 2.081 t 606s
+[length_balanced] update 56/91 loss 0.7027 acc 0.438 gnorm 1.692 t 620s
+[length_balanced] update 57/91 loss 0.7050 acc 0.375 gnorm 1.887 t 629s
+[length_balanced] update 58/91 loss 0.6839 acc 0.562 gnorm 1.873 t 639s
+[length_balanced] update 59/91 loss 0.6724 acc 0.812 gnorm 2.157 t 651s
+[length_balanced] update 60/91 loss 0.6995 acc 0.438 gnorm 2.054 t 662s
+[length_balanced] update 61/91 loss 0.6982 acc 0.438 gnorm 1.695 t 672s
+[length_balanced] update 62/91 loss 0.6699 acc 0.688 gnorm 1.782 t 681s
+[length_balanced] update 63/91 loss 0.6693 acc 0.688 gnorm 1.663 t 691s
+[length_balanced] update 64/91 loss 0.6697 acc 0.688 gnorm 2.019 t 704s
+[length_balanced] update 65/91 loss 0.6805 acc 0.562 gnorm 1.945 t 715s
+[length_balanced] update 66/91 loss 0.6674 acc 0.750 gnorm 1.926 t 730s
+[length_balanced] update 67/91 loss 0.6579 acc 0.688 gnorm 2.043 t 741s
+[length_balanced] update 68/91 loss 0.6810 acc 0.625 gnorm 1.909 t 750s
+[length_balanced] update 69/91 loss 0.6522 acc 0.875 gnorm 1.870 t 762s
+[length_balanced] update 70/91 loss 0.6935 acc 0.562 gnorm 2.052 t 771s
+[length_balanced] update 71/91 loss 0.6987 acc 0.562 gnorm 1.912 t 786s
+[length_balanced] update 72/91 loss 0.6691 acc 0.688 gnorm 1.740 t 796s
+[length_balanced] update 73/91 loss 0.6875 acc 0.562 gnorm 2.023 t 810s
+[length_balanced] update 74/91 loss 0.6722 acc 0.625 gnorm 1.843 t 819s
+[length_balanced] update 75/91 loss 0.6769 acc 0.625 gnorm 2.228 t 829s
+[length_balanced] update 76/91 loss 0.6739 acc 0.688 gnorm 1.963 t 840s
+[length_balanced] update 77/91 loss 0.6876 acc 0.625 gnorm 3.008 t 851s
+[length_balanced] update 78/91 loss 0.6501 acc 0.812 gnorm 2.159 t 863s
+[length_balanced] update 79/91 loss 0.6487 acc 0.750 gnorm 2.061 t 873s
+[length_balanced] update 80/91 loss 0.6613 acc 0.688 gnorm 1.738 t 882s
+[length_balanced] update 81/91 loss 0.6724 acc 0.688 gnorm 1.787 t 893s
+[length_balanced] update 82/91 loss 0.6543 acc 0.812 gnorm 1.986 t 902s
+[length_balanced] update 83/91 loss 0.6776 acc 0.750 gnorm 2.021 t 913s
+[length_balanced] update 84/91 loss 0.6646 acc 0.500 gnorm 2.049 t 924s
+[length_balanced] update 85/91 loss 0.6752 acc 0.562 gnorm 1.949 t 934s
+[length_balanced] update 86/91 loss 0.6826 acc 0.562 gnorm 1.575 t 944s
+[length_balanced] update 87/91 loss 0.6882 acc 0.625 gnorm 2.292 t 955s
+[length_balanced] update 88/91 loss 0.6640 acc 0.812 gnorm 1.867 t 968s
+[length_balanced] update 89/91 loss 0.6764 acc 0.625 gnorm 1.945 t 981s
+[length_balanced] update 90/91 loss 0.6979 acc 0.500 gnorm nan t 994s
+[length_balanced] update 91/91 loss 0.8123 acc 0.000 gnorm 6.054 t 994s
+[1/4] held-out pairs
+[2/4] length-stratified pairs
+[3/4] held-out generation
+  generated 16/290
+  generated 32/290
+  generated 48/290
+  generated 64/290
+  generated 80/290
+  generated 96/290
+  generated 112/290
+  generated 128/290
+  generated 144/290
+  generated 160/290
+  generated 176/290
+  generated 192/290
+  generated 208/290
+  generated 224/290
+  generated 240/290
+  generated 256/290
+  generated 272/290
+  generated 288/290
+  generated 290/290
+[4/4] word-limit prompts
+  generated 16/50
+  generated 32/50
+  generated 48/50
+  generated 50/50
+      condition  train_pairs  optimizer_updates  heldout_preference_accuracy  acc_preferred_longer  acc_length_matched  acc_rejected_longer  gen_len_mean  gen_len_std  gen_len_iqr  word_limit_compliance  word_limit_words_mean
+length_balanced         1442                 91                     0.624138              0.461538              0.5750             0.784810    153.396552   104.119252        212.5                   0.48                  39.46
+       standard         1446                 91                     0.637931              0.435897              0.5875             0.658228    153.968966   103.830212        211.0                   0.48                  40.32

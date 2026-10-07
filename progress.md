@@ -30,11 +30,13 @@ Other items to verify (not confirmed defects):
 ## Task 1
 - [x] objective validated
 - [x] training loop, evaluation, beta/length orchestration, summary written (untested on GPU until the Colab smoke run)
-- [ ] Colab smoke run passes
-- [ ] standard DPO (1 epoch)
-- [ ] beta study (0.03 / 0.10 / 0.30, 600 examples each)
-- [ ] length-balanced DPO + stratified eval + word-limit compliance
-- [ ] required metrics
+- [x] Colab smoke run passes (first loss = log 2)
+- [x] standard DPO (1 epoch, 1446 pairs, 91 updates; 1 fp16-overflow skip at #78)
+- [x] beta study (0.03 / 0.10 / 0.30, 600 pairs, 38 updates each; beta030 skips #2, #25)
+- [x] length-balanced DPO (1442 pairs, 91 updates; skips #20, #90) + stratified eval + word-limit compliance
+- [x] SFT evaluated under the same protocol (additional reference point)
+- [x] required metrics — `results/task1_dpo/summary.csv`; all 13 runs on commit c526ffb, validated by `scripts.validate_results`
+- Note: grad-norm clipping (max 1.0) active on 0% of beta003 updates and 100% of all other runs' updates
 - [ ] qualitative evidence
 
 ## Task 2

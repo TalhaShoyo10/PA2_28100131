@@ -1,0 +1,42 @@
+{
+  "experiment_id": "task1_dpo_train_beta003_seed6304",
+  "started_at": "2026-10-06T23:53:56+00:00",
+  "git": {
+    "commit": "c526ffbbfe7876616e0dfd1d036653b882f54133",
+    "branch": "main",
+    "dirty_tracked_files": false
+  },
+  "command": "python -m task1_dpo.ablate_beta --config configs/dpo.yaml --only 0.03",
+  "seed": 6304,
+  "runtime": {
+    "worker": "acct1",
+    "python": "3.13.15",
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.1",
+    "peft": "0.17.1",
+    "trl": "0.27.2",
+    "cuda_available": true,
+    "gpu": "Tesla T4",
+    "gpu_total_gib": 14.56
+  },
+  "task": "task1_dpo",
+  "condition": "beta003",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "initialization": "original Qwen2.5-1.5B-Instruct + fresh LoRA",
+  "adapter_output": "/content/PA2/outputs/task1_dpo/beta003",
+  "budget": {
+    "train_pairs": 600,
+    "epochs": 1,
+    "micro_batches": 300,
+    "optimizer_updates": 38,
+    "pairs_per_update": 16
+  },
+  "dropped_long_prompts": 54,
+  "ended_at": "2026-10-07T00:02:54+00:00",
+  "wall_clock_seconds": 538.6,
+  "peak_vram_allocated_gib": 7.108,
+  "artifacts": {
+    "adapter": "/content/PA2/outputs/task1_dpo/beta003",
+    "train_log": "/content/PA2/results/task1_dpo/task1_dpo_train_beta003_seed6304/train_log.jsonl"
+  }
+}

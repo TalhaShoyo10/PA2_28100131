@@ -1,0 +1,71 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791333284.252609   31157 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791333289.152961   31157 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+Beta conditions: [0.3] | examples per fork: 600
+[beta030] update 1/38 loss 0.6931 acc 0.000 gnorm 5.751 t 14s
+[beta030] update 2/38 loss 0.6940 acc 0.438 gnorm nan t 27s
+[beta030] update 3/38 loss 0.6924 acc 0.562 gnorm 5.210 t 40s
+[beta030] update 4/38 loss 0.6948 acc 0.438 gnorm 6.094 t 52s
+[beta030] update 5/38 loss 0.6952 acc 0.438 gnorm 6.782 t 68s
+[beta030] update 6/38 loss 0.6883 acc 0.625 gnorm 5.555 t 81s
+[beta030] update 7/38 loss 0.6844 acc 0.750 gnorm 7.223 t 97s
+[beta030] update 8/38 loss 0.6946 acc 0.438 gnorm 6.909 t 114s
+[beta030] update 9/38 loss 0.6947 acc 0.438 gnorm 5.335 t 127s
+[beta030] update 10/38 loss 0.6906 acc 0.562 gnorm 5.720 t 143s
+[beta030] update 11/38 loss 0.6960 acc 0.438 gnorm 6.151 t 159s
+[beta030] update 12/38 loss 0.6732 acc 0.750 gnorm 5.518 t 173s
+[beta030] update 13/38 loss 0.6859 acc 0.562 gnorm 6.399 t 189s
+[beta030] update 14/38 loss 0.7127 acc 0.375 gnorm 5.968 t 202s
+[beta030] update 15/38 loss 0.6584 acc 0.812 gnorm 6.375 t 216s
+[beta030] update 16/38 loss 0.6705 acc 0.688 gnorm 5.560 t 229s
+[beta030] update 17/38 loss 0.6825 acc 0.438 gnorm 6.756 t 244s
+[beta030] update 18/38 loss 0.6961 acc 0.500 gnorm 6.791 t 260s
+[beta030] update 19/38 loss 0.6973 acc 0.500 gnorm 6.023 t 272s
+[beta030] update 20/38 loss 0.6693 acc 0.625 gnorm 5.489 t 290s
+[beta030] update 21/38 loss 0.6808 acc 0.562 gnorm 5.551 t 305s
+[beta030] update 22/38 loss 0.7126 acc 0.312 gnorm 5.781 t 315s
+[beta030] update 23/38 loss 0.6794 acc 0.500 gnorm 4.483 t 325s
+[beta030] update 24/38 loss 0.6588 acc 0.688 gnorm 5.957 t 342s
+[beta030] update 25/38 loss 0.6770 acc 0.562 gnorm nan t 354s
+[beta030] update 26/38 loss 0.6560 acc 0.625 gnorm 5.683 t 368s
+[beta030] update 27/38 loss 0.6873 acc 0.562 gnorm 6.912 t 384s
+[beta030] update 28/38 loss 0.7038 acc 0.500 gnorm 6.116 t 397s
+[beta030] update 29/38 loss 0.6888 acc 0.500 gnorm 7.097 t 412s
+[beta030] update 30/38 loss 0.6954 acc 0.625 gnorm 6.291 t 425s
+[beta030] update 31/38 loss 0.6786 acc 0.750 gnorm 5.427 t 437s
+[beta030] update 32/38 loss 0.6892 acc 0.562 gnorm 6.127 t 453s
+[beta030] update 33/38 loss 0.6560 acc 0.562 gnorm 5.807 t 466s
+[beta030] update 34/38 loss 0.6704 acc 0.625 gnorm 5.847 t 482s
+[beta030] update 35/38 loss 0.6850 acc 0.625 gnorm 5.994 t 496s
+[beta030] update 36/38 loss 0.6827 acc 0.562 gnorm 8.920 t 509s
+[beta030] update 37/38 loss 0.6418 acc 0.812 gnorm 6.605 t 525s
+[beta030] update 38/38 loss 0.6923 acc 0.375 gnorm 7.179 t 531s
+[1/4] held-out pairs
+[2/4] length-stratified pairs
+[3/4] held-out generation
+  generated 16/290
+  generated 32/290
+  generated 48/290
+  generated 64/290
+  generated 80/290
+  generated 96/290
+  generated 112/290
+  generated 128/290
+  generated 144/290
+  generated 160/290
+  generated 176/290
+  generated 192/290
+  generated 208/290
+  generated 224/290
+  generated 240/290
+  generated 256/290
+  generated 272/290
+  generated 288/290
+  generated 290/290
+[4/4] word-limit prompts
+  generated 16/50
+  generated 32/50
+  generated 48/50
+  generated 50/50

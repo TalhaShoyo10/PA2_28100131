@@ -1,0 +1,8 @@
+{
+  "experiment_id": "task1_dpo_train_smoke_seed6304",
+  "state": "done",
+  "worker": "acct1",
+  "updated_unix": 1791327570.1727774,
+  "updated_at": "2026-10-06T22:59:30+00:00",
+  "wall_clock_seconds": 23.6
+}

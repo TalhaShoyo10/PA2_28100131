@@ -1,0 +1,8 @@
+{
+  "experiment_id": "task1_dpo_train_beta003_seed6304",
+  "state": "done",
+  "worker": "acct1",
+  "updated_unix": 1791331374.839089,
+  "updated_at": "2026-10-07T00:02:54+00:00",
+  "wall_clock_seconds": 538.6
+}

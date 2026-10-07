@@ -1,0 +1,42 @@
+{
+  "experiment_id": "task1_dpo_eval_beta003_seed6304",
+  "started_at": "2026-10-07T00:02:54+00:00",
+  "git": {
+    "commit": "c526ffbbfe7876616e0dfd1d036653b882f54133",
+    "branch": "main",
+    "dirty_tracked_files": false
+  },
+  "command": "python -m task1_dpo.ablate_beta --config configs/dpo.yaml --only 0.03",
+  "seed": 6304,
+  "runtime": {
+    "worker": "acct1",
+    "python": "3.13.15",
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.1",
+    "peft": "0.17.1",
+    "trl": "0.27.2",
+    "cuda_available": true,
+    "gpu": "Tesla T4",
+    "gpu_total_gib": 14.56
+  },
+  "task": "task1_dpo",
+  "condition": "beta003",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "checkpoint": "/content/PA2/outputs/task1_dpo/beta003",
+  "decoding": {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "do_sample": true,
+    "max_new_tokens": 256
+  },
+  "word_limit_samples_per_prompt": 5,
+  "ended_at": "2026-10-07T00:14:02+00:00",
+  "wall_clock_seconds": 667.8,
+  "peak_vram_allocated_gib": 7.241,
+  "artifacts": {
+    "pairs_heldout": "pairs_heldout.jsonl",
+    "pairs_length_stratified": "pairs_length_stratified.jsonl",
+    "generations_heldout": "generations_heldout.jsonl",
+    "generations_word_limit": "generations_word_limit.jsonl"
+  }
+}

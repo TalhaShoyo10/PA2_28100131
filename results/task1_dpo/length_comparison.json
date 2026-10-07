@@ -1,0 +1,30 @@
+[
+  {
+    "condition": "length_balanced",
+    "train_pairs": 1442,
+    "optimizer_updates": 91,
+    "heldout_preference_accuracy": 0.6241379310344828,
+    "acc_preferred_longer": 0.46153846153846156,
+    "acc_length_matched": 0.575,
+    "acc_rejected_longer": 0.7848101265822784,
+    "gen_len_mean": 153.39655172413794,
+    "gen_len_std": 104.11925186438408,
+    "gen_len_iqr": 212.5,
+    "word_limit_compliance": 0.48,
+    "word_limit_words_mean": 39.46
+  },
+  {
+    "condition": "standard",
+    "train_pairs": 1446,
+    "optimizer_updates": 91,
+    "heldout_preference_accuracy": 0.6379310344827587,
+    "acc_preferred_longer": 0.4358974358974359,
+    "acc_length_matched": 0.5875,
+    "acc_rejected_longer": 0.6582278481012658,
+    "gen_len_mean": 153.96896551724137,
+    "gen_len_std": 103.83021154733495,
+    "gen_len_iqr": 211.0,
+    "word_limit_compliance": 0.48,
+    "word_limit_words_mean": 40.32
+  }
+]

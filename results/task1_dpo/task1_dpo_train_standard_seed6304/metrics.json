@@ -1,0 +1,10 @@
+{
+  "beta": 0.1,
+  "optimizer_updates": 91,
+  "train_pairs": 1446,
+  "first_update_loss": 0.6931471824645996,
+  "final_update_loss": 0.6173627972602844,
+  "final_update_train_preference_accuracy": 0.8333333333333334,
+  "mean_train_loss_last_5_updates": 0.6667843639850617,
+  "skipped_overflow_updates": 1
+}

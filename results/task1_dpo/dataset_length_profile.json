@@ -1,0 +1,25 @@
+{
+  "dpo_standard_train": {
+    "n_pairs": 1446,
+    "fraction_chosen_longer": 0.5712309820193637,
+    "fraction_rejected_longer": 0.4142461964038728,
+    "fraction_equal_length": 0.014522821576763486,
+    "mean_chosen_minus_rejected_tokens": 45.905255878284926,
+    "median_chosen_minus_rejected_tokens": 20.0,
+    "corr_length_diff_vs_score_diff": 0.059489551189496934
+  },
+  "dpo_length_train": {
+    "n_pairs": 1442,
+    "fraction_chosen_longer": 0.49029126213592233,
+    "fraction_rejected_longer": 0.48751733703190014,
+    "fraction_equal_length": 0.022191400832177532,
+    "mean_chosen_minus_rejected_tokens": 4.728155339805825,
+    "median_chosen_minus_rejected_tokens": 0.0,
+    "corr_length_diff_vs_score_diff": 0.060418827581652325,
+    "strata_counts": {
+      "length_matched": 482,
+      "preferred_longer": 478,
+      "rejected_longer": 482
+    }
+  }
+}
