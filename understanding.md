@@ -278,3 +278,38 @@ corr(length, advantage).
   completions with non-zero advantage.
 - **Note:** rewards are continuous RM scores, so exact zero-std groups will be rare (the midpoint metadata reports 2%).
   The *size* of the within-group spread carries most of the information.
+
+---
+
+## 10. Task 4 safety pipeline — `task4_safety/`
+
+| Step | Script | Output (in `results/task4_safety/`) |
+|---|---|---|
+| generate | `generate_responses.py` → release `generate_for_policy` (greedy, ≤256 new tokens, batch 16), one run per policy | `generated_<policy>.jsonl` |
+| judge | `judge_responses.py` → release `judge_one` (Qwen2.5-3B, 4-bit, greedy, ≤64 tokens) on every response | `judged_<policy>.jsonl` (label, confidence, rationale tag, parse_failure) |
+| audit sheet | `make_audit_sheet.py`: release `fixed_audit_ids` (30 SAFE + 30 UNSAFE, seed 6304) × 4 policies = 240 items, shuffled | `audit_sheet_blind.csv` (prompt, response, empty `manual_label`), `audit_key.csv` |
+| evaluate | `evaluate_safety.py` | `safety_summary.csv`, `category_label_distribution.csv`, `policy_label_differences.csv`, `safety_metrics.json`, and after labelling: `audit_confusion_*.csv`, `audit_disagreements.csv` |
+
+**Rates** use the denominators from the course judge spec: the safe-prompt rates are over the 250 SAFE prompts,
+the unsafe-prompt rates over the 200 UNSAFE prompts, and the ambiguous rate over all 450 (also per class). The judge
+never sees the XSTest class, so it can emit a label from the "wrong" class (e.g. JUSTIFIED_REFUSAL on a SAFE prompt).
+Those labels count against neither class rate and are reported as `class_inconsistent_label_rate`, a judge
+failure mode worth checking.
+
+**Decision records**
+- *Fixed policies enforced in code*: generation checks that `task1_dpo_train_standard`, `task2_ppo_train_standard`,
+  and `task3_grpo_train_standard` are `done` and that the configured adapter exists.
+- *Audit = 60 prompts × 4 policies = 240 items* (student decision 2026-10-09, following the release's "join these IDs
+  to each policy's responses"). Gives per-policy agreement on 60 items each.
+- *Blind sheet*: shows only prompt and response, with no policy, no XSTest class, and no AI label; shuffled with the
+  seed. This is the same information the judge sees, so agreement compares like with like.
+- *Batch size 16* for greedy generation (identical for all policies).
+
+**Agreement outputs**: overall and per-policy agreement and Cohen's κ, per-class agreement, manual vs judge ambiguous
+rate, a 5×5 confusion table (rows = manual, columns = judge), and rates computed from both label sources on the audit
+subset. `audit_disagreements.csv` has an empty `disagreement_type` column for **your** classification (policy
+difference / judge error / both). The script never writes labels.
+
+**Qualitative pool**: `policy_label_differences.csv` lists, in fixed `xstest_id` order, every prompt whose judge label
+differs across the four policies. Pick harmful-compliance, justified-refusal, and over-refusal examples from it (and
+from the audit) using a rule you state before looking (e.g. the first ID in each category).

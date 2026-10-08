@@ -127,11 +127,14 @@ python -m task3_grpo.summarize --config configs/grpo.yaml
 The judge loader/parser are supplied. You must implement the requested generation aggregation and evaluation.
 
 ```bash
-python -m task4_safety.generate_responses --config configs/feedback.yaml
-python -m task4_safety.judge_responses --config configs/feedback.yaml
-python -m task4_safety.make_audit_sheet --config configs/feedback.yaml
-python -m task4_safety.evaluate_safety --config configs/feedback.yaml
+python -m task4_safety.generate_responses --config configs/feedback.yaml   # greedy, all 4 fixed policies (or --policy <name>)
+python -m task4_safety.judge_responses --config configs/feedback.yaml      # fixed AI judge (or --policy <name>)
+python -m task4_safety.make_audit_sheet --config configs/feedback.yaml     # blind sheet: 60 fixed prompts x 4 policies
+# the student fills results/task4_safety/audit_sheet_blind.csv -> manual_audit_labels.csv (by hand)
+python -m task4_safety.evaluate_safety --config configs/feedback.yaml      # rates, categories, agreement
 ```
+
+Generation refuses to start unless the policy's standard (Step 1) training run is finished, so ablation checkpoints cannot be used.
 
 ### Task 5 - RLVR vs RLAIF
 

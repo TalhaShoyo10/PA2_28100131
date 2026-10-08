@@ -57,13 +57,14 @@ Other items to verify (not confirmed defects):
 ## Task 3
 - [x] objective validated
 - [x] continuation loop, evaluation, group-size study, normalization forks, summary written (untested on GPU until the Colab smoke run)
-- [ ] Colab smoke run passes
-- [ ] standard 20-update continuation (+ VRAM, wall time)
-- [ ] K-study from cache (2/4/8, equal generations, difficulty bins fixed once)
-- [ ] canonical vs Dr.-GRPO forks
+- [x] Colab smoke run passes
+- [x] standard 20-update continuation (+ VRAM, wall time)
+- [x] K-study from cache (2/4/8, equal generations, difficulty bins fixed once)
+- [x] canonical vs Dr.-GRPO forks (Dr-GRPO grad norm 0.04 vs 0.63: step-size confounder; ~25% of completions truncated+masked)
 - [ ] qualitative evidence
 
 ## Task 4 (only after Task 1–3 standard policies exist)
+- [x] generation / judge / blind audit sheet / evaluation code written (untested on GPU)
 - [ ] deterministic generation, 4 fixed policies
 - [ ] AI judge labels + aggregate rates
 - [ ] blind audit sheet generated

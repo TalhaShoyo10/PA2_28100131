@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import argparse
+import json
+
 import pandas as pd
 
-from common.data import load_yaml, repo_path
+from common.data import load_yaml, repo_path, write_jsonl
 from common.generation import batch_generate
+from common.metrics import length_stats
 from common.models import load_policy, load_tokenizer
+from common.run_record import RunRecord, experiment_id
 
 
 def policy_specs(cfg):
@@ -56,16 +60,69 @@ def generate_for_policy(cfg, policy_name: str, batch_size: int = 4):
     return records
 
 
+# The standard (Step 1) training run that produced each fixed Task 4 adapter. Generation refuses to
+# start unless that run finished, so an ablation fork or a half-trained adapter can never be used.
+STANDARD_TRAIN_RUNS = {
+    "dpo": ("task1_dpo", "task1_dpo_train_standard"),
+    "ppo": ("task2_ppo", "task2_ppo_train_standard"),
+    "grpo": ("task3_grpo", "task3_grpo_train_standard"),
+}
+GEN_BATCH_SIZE = 16  # greedy decoding; the same batching for every policy
+
+
+def safety_dir(cfg):
+    return repo_path(cfg["results_dir"]) / "task4_safety"
+
+
+def check_standard_policy(cfg, name: str) -> None:
+    if name == "sft":
+        return
+    task, prefix = STANDARD_TRAIN_RUNS[name]
+    status = repo_path(cfg["results_dir"]) / task / f"{prefix}_seed{int(cfg['seed'])}" / "status.json"
+    if not status.exists() or json.loads(status.read_text(encoding="utf-8"))["state"] != "done":
+        raise SystemExit(f"{name}: standard training run {status.parent.name} is not done; Task 4 needs the finished standard policy")
+    if not (repo_path(cfg["policies"][name]) / "adapter_config.json").exists():
+        raise SystemExit(f"{name}: adapter not found at {cfg['policies'][name]}")
+
+
+def run_policy(cfg, name: str) -> None:
+    exp_id = experiment_id("task4_safety", f"generate_{name}", int(cfg["seed"]))
+    record = RunRecord(safety_dir(cfg), exp_id, cfg, extra={
+        "task": "task4_safety", "condition": name, "model": cfg["base_model"],
+        "checkpoint": cfg["policies"][name] or "SFT (no adapter)",
+        "decoding": {"do_sample": False, "max_new_tokens": int(cfg["safety_max_new_tokens"]), "max_prompt_length": 256,
+                     "batch_size": GEN_BATCH_SIZE},
+    })
+    if record.is_done():
+        print(f"[skip] {exp_id} already done")
+        return
+    check_standard_policy(cfg, name)
+    with record:
+        records = generate_for_policy(cfg, name, batch_size=GEN_BATCH_SIZE)
+        write_jsonl(record.dir / "generated.jsonl", records)
+        # Canonical copy at the fixed path the release's make_audit_sheet reads.
+        write_jsonl(safety_dir(cfg) / f"generated_{name}.jsonl", records)
+        lengths = [r["response_tokens"] for r in records]
+        record.finish({
+            "policy": name,
+            "n_prompts": len(records),
+            "n_safe": sum(r["benchmark_class"] == "SAFE" for r in records),
+            "n_unsafe": sum(r["benchmark_class"] == "UNSAFE" for r in records),
+            "response_tokens": length_stats(lengths),
+            "hit_max_new_tokens": sum(n >= int(cfg["safety_max_new_tokens"]) for n in lengths),
+        }, artifacts={"generated": f"generated_{name}.jsonl"})
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="configs/feedback.yaml")
+    ap.add_argument("--policy", choices=["sft", "dpo", "ppo", "grpo"], help="one policy (default: all four)")
     args = ap.parse_args()
     cfg = load_yaml(args.config)
     print("Policies:", list(policy_specs(cfg)))
     print("XSTest rows:", len(load_xstest(cfg)))
-    raise NotImplementedError(
-        "TODO(student): call generate_for_policy for SFT/DPO/PPO/GRPO, save common deterministic responses, and preserve the fixed prompt order."
-    )
+    for name in ([args.policy] if args.policy else list(policy_specs(cfg))):
+        run_policy(cfg, name)
 
 
 if __name__ == "__main__":
