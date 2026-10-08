@@ -1,0 +1,1 @@
+python -m task3_grpo.compare_normalization --config configs/grpo.yaml --only grpo

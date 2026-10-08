@@ -1,0 +1,8 @@
+{
+  "experiment_id": "task2_ppo_train_fork_eps050_kl010_seed6304",
+  "state": "done",
+  "worker": "acct1",
+  "updated_unix": 1791377596.520062,
+  "updated_at": "2026-10-07T12:53:16+00:00",
+  "wall_clock_seconds": 111.5
+}

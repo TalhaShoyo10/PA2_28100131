@@ -1,0 +1,38 @@
+{
+  "experiment_id": "task3_grpo_eval_fork_dr_grpo_seed6304",
+  "started_at": "2026-10-08T19:40:00+00:00",
+  "git": {
+    "commit": "c2fdf5149aac7dcd8e28835bcb7174e3d518c1fc",
+    "branch": "main",
+    "dirty_tracked_files": false
+  },
+  "command": "python -m task3_grpo.compare_normalization --config configs/grpo.yaml --only dr_grpo",
+  "seed": 6304,
+  "runtime": {
+    "worker": "acct1",
+    "python": "3.13.15",
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.1",
+    "peft": "0.17.1",
+    "trl": "0.27.2",
+    "cuda_available": true,
+    "gpu": "Tesla T4",
+    "gpu_total_gib": 14.56
+  },
+  "task": "task3_grpo",
+  "condition": "fork_dr_grpo",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "checkpoint": "/content/PA2/outputs/task3_grpo/fork_dr_grpo",
+  "decoding": {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "do_sample": true,
+    "max_new_tokens": 512
+  },
+  "ended_at": "2026-10-08T19:47:12+00:00",
+  "wall_clock_seconds": 432.2,
+  "peak_vram_allocated_gib": 6.158,
+  "artifacts": {
+    "generations_heldout": "generations_heldout.jsonl"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "updates": 8,
+  "clip_epsilon": 0.2,
+  "kl_beta": 0.2,
+  "generated_tokens": 1984,
+  "skipped_overflow_steps": 3,
+  "reward_effective_mean": 1.07159423828125,
+  "kl_ref_last": -0.0006610039272345603,
+  "clip_fraction_mean": 0.0
+}

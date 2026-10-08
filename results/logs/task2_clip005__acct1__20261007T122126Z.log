@@ -1,0 +1,29 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791375692.403799    3281 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791375695.847327    3281 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+[skip] task2_ppo_train_fork_eps005_kl010_seed6304 already done; adapter at /content/PA2/outputs/task2_ppo/fork_eps005_kl010
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/content/PA2/task2_ppo/analyze_clipping.py", line 243, in <module>
+    main()
+    ~~~~^^
+  File "/content/PA2/task2_ppo/analyze_clipping.py", line 239, in main
+    forks(args.config, args.only)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/PA2/task2_ppo/analyze_clipping.py", line 227, in forks
+    evaluate_policy(config_path, adapter=str(adapter), name=name)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/content/PA2/task2_ppo/evaluate.py", line 42, in evaluate_policy
+    with record:
+         ^^^^^^
+  File "/content/PA2/common/run_record.py", line 211, in __enter__
+    return self.start()
+           ~~~~~~~~~~^^
+  File "/content/PA2/common/run_record.py", line 150, in start
+    raise RunInProgress(
+    ...<2 lines>...
+    )
+common.run_record.RunInProgress: task2_ppo_eval_fork_eps005_kl010_seed6304 is running on worker acct1 (heartbeat 13.7 min ago). Not starting a second copy.

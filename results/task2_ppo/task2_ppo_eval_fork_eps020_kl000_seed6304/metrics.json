@@ -1,0 +1,24 @@
+{
+  "n_prompts": 165,
+  "reward_raw_mean": 1.8090210423325048,
+  "reward_raw_std": 1.3088486500813556,
+  "reward_effective_mean": 1.7181119514234138,
+  "kl_token_mean": -2.1543381503471138e-05,
+  "kl_sequence_mean": -0.006430503529863376,
+  "entropy_token_mean": 0.7876486348829769,
+  "length_tokens": {
+    "n": 165,
+    "mean": 298.4909090909091,
+    "std": 255.0687041891837,
+    "median": 246.0,
+    "q25": 48.0,
+    "q75": 493.0,
+    "iqr": 445.0,
+    "max": 768.0
+  },
+  "truncation_rate": 0.09090909090909091,
+  "missing_eos_rate": 0.09090909090909091,
+  "policy": "fork_eps020_kl000",
+  "adapter": "/content/PA2/outputs/task2_ppo/fork_eps020_kl000",
+  "excluded_long_prompts": 35
+}

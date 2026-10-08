@@ -1,0 +1,9 @@
+{
+  "updates": 8,
+  "loss_type": "grpo",
+  "generated_tokens": 7841,
+  "reward_mean": 1.5521917343139648,
+  "uninformative_group_fraction": 0.0,
+  "mean_group_reward_std": 0.6381431706249714,
+  "skipped_overflow_steps": 0
+}

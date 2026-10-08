@@ -1,0 +1,28 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791486302.071357    7075 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791486304.960542    7075 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+/content/PA2/task3_grpo/continue_train.py:142: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  "loss": float(loss),
+[standard] update 1/20 reward +0.758 std 0.632 kl -0.00012 loss +0.0000 gnorm 0.000 len 512 trunc 4 t 34s
+[standard] update 2/20 reward +1.093 std 0.946 kl +0.00007 loss +0.0000 gnorm 0.000 len 512 trunc 4 t 65s
+[standard] update 3/20 reward +2.387 std 0.444 kl -0.00014 loss -0.0006 gnorm 2.219 len 14 trunc 0 t 68s
+[standard] update 4/20 reward +1.223 std 1.393 kl +0.00003 loss -0.4149 gnorm 0.072 len 494 trunc 1 t 99s
+[standard] update 5/20 reward +2.008 std 0.412 kl -0.00006 loss -0.0000 gnorm 1.602 len 10 trunc 0 t 101s
+[standard] update 6/20 reward +0.309 std 0.539 kl +0.00073 loss -0.0005 gnorm 0.691 len 29 trunc 0 t 104s
+[standard] update 7/20 reward +2.542 std 0.346 kl +0.00003 loss -0.0002 gnorm 0.155 len 273 trunc 0 t 124s
+[standard] update 8/20 reward +2.097 std 0.394 kl -0.00004 loss -0.0003 gnorm 0.320 len 115 trunc 0 t 136s
+[standard] update 9/20 reward +1.578 std 0.670 kl +0.00017 loss -0.4643 gnorm 0.116 len 457 trunc 2 t 167s
+[standard] update 10/20 reward +1.849 std 0.382 kl -0.00012 loss -0.4222 gnorm 0.159 len 507 trunc 3 t 199s
+[standard] update 11/20 reward +1.045 std 0.615 kl +0.00008 loss -0.0001 gnorm 0.181 len 330 trunc 0 t 227s
+[standard] update 12/20 reward +1.632 std 1.160 kl -0.00005 loss +0.2394 gnorm 0.249 len 356 trunc 2 t 259s
+[standard] update 13/20 reward +0.832 std 0.540 kl +0.00018 loss +0.0005 gnorm 0.252 len 132 trunc 0 t 269s
+[standard] update 14/20 reward +3.005 std 0.151 kl +0.00203 loss +0.0021 gnorm 5.233 len 6 trunc 0 t 271s
+[standard] update 15/20 reward +2.027 std 0.088 kl +0.00028 loss -0.0000 gnorm 0.142 len 256 trunc 0 t 289s
+[standard] update 16/20 reward +1.591 std 0.145 kl -0.00397 loss +0.0088 gnorm 10.878 len 4 trunc 0 t 290s
+[standard] update 17/20 reward +2.825 std 0.200 kl +0.00003 loss +0.0001 gnorm 0.156 len 368 trunc 0 t 318s
+[standard] update 18/20 reward +1.886 std 0.490 kl +0.00030 loss +0.0561 gnorm 0.143 len 404 trunc 1 t 350s
+[standard] update 19/20 reward +0.106 std 1.275 kl +0.00026 loss -0.0000 gnorm 0.451 len 96 trunc 0 t 358s
+[standard] update 20/20 reward +1.153 std 0.880 kl +0.00019 loss -0.3882 gnorm 0.090 len 508 trunc 3 t 389s

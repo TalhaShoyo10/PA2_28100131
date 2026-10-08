@@ -1,0 +1,38 @@
+{
+  "experiment_id": "task2_ppo_eval_fork_eps020_kl000_seed6304",
+  "started_at": "2026-10-07T13:08:33+00:00",
+  "git": {
+    "commit": "7a6b99ad5a9b77cc004af17763af913c31466a05",
+    "branch": "main",
+    "dirty_tracked_files": false
+  },
+  "command": "python -m task2_ppo.ablate_kl --config configs/ppo.yaml --only 0.0",
+  "seed": 6304,
+  "runtime": {
+    "worker": "acct1",
+    "python": "3.13.15",
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.1",
+    "peft": "0.17.1",
+    "trl": "0.27.2",
+    "cuda_available": true,
+    "gpu": "Tesla T4",
+    "gpu_total_gib": 14.56
+  },
+  "task": "task2_ppo",
+  "condition": "fork_eps020_kl000",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "checkpoint": "/content/PA2/outputs/task2_ppo/fork_eps020_kl000",
+  "decoding": {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "do_sample": true,
+    "max_new_tokens": 768
+  },
+  "ended_at": "2026-10-07T13:18:22+00:00",
+  "wall_clock_seconds": 589.3,
+  "peak_vram_allocated_gib": 6.862,
+  "artifacts": {
+    "generations_heldout": "generations_heldout.jsonl"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "experiment_id": "task2_ppo_train_fork_eps005_kl010_seed6304",
+  "started_at": "2026-10-07T12:05:56+00:00",
+  "git": {
+    "commit": "0c32299df0f0a5e7e8426360887807ca47c12871",
+    "branch": "main",
+    "dirty_tracked_files": false
+  },
+  "command": "python -m task2_ppo.analyze_clipping --part forks --only 0.05",
+  "seed": 6304,
+  "runtime": {
+    "worker": "acct1",
+    "python": "3.13.15",
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.1",
+    "peft": "0.17.1",
+    "trl": "0.27.2",
+    "cuda_available": true,
+    "gpu": "Tesla T4",
+    "gpu_total_gib": 14.56
+  },
+  "task": "task2_ppo",
+  "condition": "fork_eps005_kl010",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "checkpoint": {
+    "policy": "checkpoints/ppo_midpoint_policy",
+    "value": "checkpoints/ppo_midpoint_value"
+  },
+  "clip_epsilon": 0.05,
+  "kl_beta": 0.1,
+  "decoding": {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "do_sample": true,
+    "max_new_tokens": 512
+  },
+  "budget": {
+    "updates": 8,
+    "prompts_per_update": 1,
+    "ppo_epochs": 2
+  },
+  "adapter_output": "/content/PA2/outputs/task2_ppo/fork_eps005_kl010",
+  "dropped_long_prompts": 256,
+  "ended_at": "2026-10-07T12:07:52+00:00",
+  "wall_clock_seconds": 115.9,
+  "peak_vram_allocated_gib": 7.194,
+  "artifacts": {
+    "policy_adapter": "/content/PA2/outputs/task2_ppo/fork_eps005_kl010",
+    "value_adapter": "/content/PA2/outputs/task2_ppo/fork_eps005_kl010_value",
+    "train_log": "/content/drive/MyDrive/ATML_PA2/results/task2_ppo/task2_ppo_train_fork_eps005_kl010_seed6304/train_log.jsonl"
+  }
+}

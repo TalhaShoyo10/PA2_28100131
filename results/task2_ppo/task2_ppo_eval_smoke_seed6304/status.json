@@ -1,0 +1,8 @@
+{
+  "experiment_id": "task2_ppo_eval_smoke_seed6304",
+  "state": "done",
+  "worker": "acct1",
+  "updated_unix": 1791373009.425914,
+  "updated_at": "2026-10-07T11:36:49+00:00",
+  "wall_clock_seconds": 59.8
+}

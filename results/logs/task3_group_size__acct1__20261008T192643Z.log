@@ -1,0 +1,8 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791487612.619414   12831 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791487615.757309   12831 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+K=2: {'n_groups': 96, 'n_generations': 192, 'informative_group_rate': 0.9375, 'mean_within_group_reward_std': 0.3845672607421875, 'median_within_group_reward_std': 0.244384765625, 'variance_normalized_advantage': 0.9374814117154214, 'variance_centred_reward': 0.3368348789711793, 'mean_abs_normalized_advantage': 0.9374907054007053, 'fraction_nonzero_advantage': 0.9375}
+K=4: {'n_groups': 48, 'n_generations': 192, 'informative_group_rate': 0.9583333333333334, 'mean_within_group_reward_std': 0.5410043663966159, 'median_within_group_reward_std': 0.47366607189178467, 'variance_normalized_advantage': 0.9583276057940306, 'variance_centred_reward': 0.4677260586371024, 'mean_abs_normalized_advantage': 0.8307160401454894, 'fraction_nonzero_advantage': 0.9583333333333334}
+K=8: {'n_groups': 24, 'n_generations': 192, 'informative_group_rate': 0.9583333333333334, 'mean_within_group_reward_std': 0.619054414331913, 'median_within_group_reward_std': 0.4710747301578522, 'variance_normalized_advantage': 0.9583290636625043, 'variance_centred_reward': 0.5598951438441873, 'mean_abs_normalized_advantage': 0.7939281876278983, 'fraction_nonzero_advantage': 0.9583333333333334}

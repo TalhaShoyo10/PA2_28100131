@@ -1,0 +1,1 @@
+python -m task3_grpo.analyze_group_size --config configs/grpo.yaml

@@ -1,0 +1,38 @@
+{
+  "experiment_id": "task3_grpo_group_size_seed6304",
+  "started_at": "2026-10-08T19:26:47+00:00",
+  "git": {
+    "commit": "c2fdf5149aac7dcd8e28835bcb7174e3d518c1fc",
+    "branch": "main",
+    "dirty_tracked_files": false
+  },
+  "command": "python -m task3_grpo.analyze_group_size --config configs/grpo.yaml",
+  "seed": 6304,
+  "runtime": {
+    "worker": "acct1",
+    "python": "3.13.15",
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.1",
+    "peft": "0.17.1",
+    "trl": "0.27.2",
+    "cuda_available": true,
+    "gpu": "Tesla T4",
+    "gpu_total_gib": 14.56
+  },
+  "task": "task3_grpo",
+  "condition": "group_size",
+  "cache": "cached/grpo_k_cache.jsonl",
+  "group_sizes": [
+    2,
+    4,
+    8
+  ],
+  "regrouping": "consecutive disjoint groups by generation_index",
+  "difficulty_rule": "tertiles of per-prompt mean reward over the 8 cached completions",
+  "ended_at": "2026-10-08T19:26:57+00:00",
+  "wall_clock_seconds": 10.3,
+  "peak_vram_allocated_gib": 0.0,
+  "artifacts": {
+    "groups": "groups.jsonl"
+  }
+}

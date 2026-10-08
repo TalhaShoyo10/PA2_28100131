@@ -1,0 +1,8 @@
+{
+  "experiment_id": "task2_ppo_eval_fork_eps020_kl020_seed6304",
+  "state": "done",
+  "worker": "acct1",
+  "updated_unix": 1791379878.1633513,
+  "updated_at": "2026-10-07T13:31:18+00:00",
+  "wall_clock_seconds": 593.0
+}

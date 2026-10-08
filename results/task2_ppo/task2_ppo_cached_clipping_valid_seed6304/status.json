@@ -1,0 +1,8 @@
+{
+  "experiment_id": "task2_ppo_cached_clipping_valid_seed6304",
+  "state": "done",
+  "worker": "acct1",
+  "updated_unix": 1791380576.7582667,
+  "updated_at": "2026-10-07T13:42:56+00:00",
+  "wall_clock_seconds": 127.8
+}

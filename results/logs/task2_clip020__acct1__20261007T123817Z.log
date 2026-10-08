@@ -1,0 +1,24 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791376707.851005    7660 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791376711.930559    7660 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+[fork_eps020_kl010] update 1/8 reward -0.296 kl +0.0000 ploss +0.0001 vloss 4.850 clip 0.000 len 512 t 32s
+[fork_eps020_kl010] update 2/8 reward -1.861 kl +0.0002 ploss -0.0001 vloss 7.194 clip 0.000 len 512 t 60s
+[fork_eps020_kl010] update 3/8 reward +1.979 kl +0.0028 ploss -0.0001 vloss 33.772 clip 0.000 len 5 t 62s
+[fork_eps020_kl010] update 4/8 reward +2.588 kl +0.0001 ploss +0.0000 vloss 5.026 clip 0.000 len 510 t 91s
+[fork_eps020_kl010] update 5/8 reward +0.861 kl -0.0020 ploss +0.0013 vloss 0.892 clip 0.000 len 15 t 93s
+[fork_eps020_kl010] update 6/8 reward +0.730 kl +0.0011 ploss +0.0002 vloss 4.482 clip 0.000 len 32 t 97s
+[fork_eps020_kl010] update 7/8 reward +2.848 kl +0.0000 ploss +0.0003 vloss 4.910 clip 0.000 len 228 t 110s
+[fork_eps020_kl010] update 8/8 reward -0.371 kl +0.0004 ploss -0.0002 vloss 2.955 clip 0.000 len 65 t 115s
+  evaluated 16/165
+  evaluated 32/165
+  evaluated 48/165
+  evaluated 64/165
+  evaluated 80/165
+  evaluated 96/165
+  evaluated 112/165
+  evaluated 128/165
+  evaluated 144/165
+  evaluated 160/165
+  evaluated 165/165

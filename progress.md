@@ -48,7 +48,9 @@ Other items to verify (not confirmed defects):
 ## Task 2
 - [x] objective validated (+ GAE and KL-shaping tests)
 - [x] continuation loop, evaluation, cached clipping study, clip/KL forks, summary written
-- [x] all runs done on Colab: standard, midpoint eval, cached_clipping_valid (29/32 rollouts), 5 forks — results on Drive, not yet committed
+- [x] all runs done on Colab and committed: standard, midpoint eval, cached_clipping_valid (29/32 rollouts), 5 forks.
+  Code: runs at 0c32299 or 7a6b99a (differ only in eval heartbeat + release_run, no computational change); cached_clipping_valid at cd5c9a7.
+  Archived evidence: cached_clipping (first run, 3 invalid rollouts), eval_fork_eps005 attempt1 (lost session), train_smoke attempt1.
 - [ ] standard 20-update continuation (+ VRAM, wall time)
 - [ ] cached clipping diagnostic + matched 8-update forks (ε 0.05/0.20/0.50)
 - [ ] KL forks (βKL 0/0.10/0.20)
@@ -60,6 +62,7 @@ Other items to verify (not confirmed defects):
 - [x] Colab smoke run passes
 - [x] standard 20-update continuation (+ VRAM, wall time)
 - [x] K-study from cache (2/4/8, equal generations, difficulty bins fixed once)
+- [x] all Task 3 runs committed (commit c2fdf51)
 - [x] canonical vs Dr.-GRPO forks (Dr-GRPO grad norm 0.04 vs 0.63: step-size confounder; ~25% of completions truncated+masked)
 - [ ] qualitative evidence
 

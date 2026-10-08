@@ -1,0 +1,50 @@
+{
+  "experiment_id": "task3_grpo_train_fork_dr_grpo_seed6304",
+  "started_at": "2026-10-08T19:37:37+00:00",
+  "git": {
+    "commit": "c2fdf5149aac7dcd8e28835bcb7174e3d518c1fc",
+    "branch": "main",
+    "dirty_tracked_files": false
+  },
+  "command": "python -m task3_grpo.compare_normalization --config configs/grpo.yaml --only dr_grpo",
+  "seed": 6304,
+  "runtime": {
+    "worker": "acct1",
+    "python": "3.13.15",
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.1",
+    "peft": "0.17.1",
+    "trl": "0.27.2",
+    "cuda_available": true,
+    "gpu": "Tesla T4",
+    "gpu_total_gib": 14.56
+  },
+  "task": "task3_grpo",
+  "condition": "fork_dr_grpo",
+  "loss_type": "dr_grpo",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "checkpoint": "checkpoints/grpo_midpoint_policy",
+  "decoding": {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "do_sample": true,
+    "max_new_tokens": 512
+  },
+  "budget": {
+    "updates": 8,
+    "prompts_per_update": 1,
+    "generations_per_prompt": 4,
+    "policy_epochs": 1
+  },
+  "grad_scaler_init": 4096.0,
+  "adapter_output": "/content/PA2/outputs/task3_grpo/fork_dr_grpo",
+  "dropped_long_prompts": 256,
+  "ended_at": "2026-10-08T19:40:00+00:00",
+  "wall_clock_seconds": 142.3,
+  "peak_vram_allocated_gib": 8.267,
+  "artifacts": {
+    "adapter": "/content/PA2/outputs/task3_grpo/fork_dr_grpo",
+    "train_log": "/content/drive/MyDrive/ATML_PA2/results/task3_grpo/task3_grpo_train_fork_dr_grpo_seed6304/train_log.jsonl",
+    "completions": "/content/drive/MyDrive/ATML_PA2/results/task3_grpo/task3_grpo_train_fork_dr_grpo_seed6304/completions.jsonl"
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "by_K": {
+    "2": {
+      "overall": {
+        "n_groups": 96,
+        "n_generations": 192,
+        "informative_group_rate": 0.9375,
+        "mean_within_group_reward_std": 0.3845672607421875,
+        "median_within_group_reward_std": 0.244384765625,
+        "variance_normalized_advantage": 0.9374814117154214,
+        "variance_centred_reward": 0.3368348789711793,
+        "mean_abs_normalized_advantage": 0.9374907054007053,
+        "fraction_nonzero_advantage": 0.9375
+      },
+      "by_difficulty": {
+        "hard": {
+          "n_groups": 32,
+          "n_generations": 64,
+          "informative_group_rate": 0.84375,
+          "mean_within_group_reward_std": 0.49340057373046875,
+          "median_within_group_reward_std": 0.28173828125,
+          "variance_normalized_advantage": 0.8437429704090508,
+          "variance_centred_reward": 0.5984376166015863,
+          "mean_abs_normalized_advantage": 0.8437464851886034,
+          "fraction_nonzero_advantage": 0.84375
+        },
+        "medium": {
+          "n_groups": 32,
+          "n_generations": 64,
+          "informative_group_rate": 0.96875,
+          "mean_within_group_reward_std": 0.41237640380859375,
+          "median_within_group_reward_std": 0.34375,
+          "variance_normalized_advantage": 0.9687324469914853,
+          "variance_centred_reward": 0.3040905836969614,
+          "mean_abs_normalized_advantage": 0.9687412232160568,
+          "fraction_nonzero_advantage": 0.96875
+        },
+        "easy": {
+          "n_groups": 32,
+          "n_generations": 64,
+          "informative_group_rate": 1.0,
+          "mean_within_group_reward_std": 0.2479248046875,
+          "median_within_group_reward_std": 0.17578125,
+          "variance_normalized_advantage": 0.9999688177457285,
+          "variance_centred_reward": 0.10797643661499023,
+          "mean_abs_normalized_advantage": 0.9999844077974558,
+          "fraction_nonzero_advantage": 1.0
+        }
+      }
+    },
+    "4": {
+      "overall": {
+        "n_groups": 48,
+        "n_generations": 192,
+        "informative_group_rate": 0.9583333333333334,
+        "mean_within_group_reward_std": 0.5410043663966159,
+        "median_within_group_reward_std": 0.47366607189178467,
+        "variance_normalized_advantage": 0.9583276057940306,
+        "variance_centred_reward": 0.4677260586371024,
+        "mean_abs_normalized_advantage": 0.8307160401454894,
+        "fraction_nonzero_advantage": 0.9583333333333334
+      },
+      "by_difficulty": {
+        "hard": {
+          "n_groups": 16,
+          "n_generations": 64,
+          "informative_group_rate": 0.875,
+          "mean_within_group_reward_std": 0.6614877581596375,
+          "median_within_group_reward_std": 0.5703299045562744,
+          "variance_normalized_advantage": 0.8749959542057824,
+          "variance_centred_reward": 0.786526813171804,
+          "mean_abs_normalized_advantage": 0.7488248277659295,
+          "fraction_nonzero_advantage": 0.875
+        },
+        "medium": {
+          "n_groups": 16,
+          "n_generations": 64,
+          "informative_group_rate": 1.0,
+          "mean_within_group_reward_std": 0.5516941300593317,
+          "median_within_group_reward_std": 0.50240758061409,
+          "variance_normalized_advantage": 0.9999937655649884,
+          "variance_centred_reward": 0.4017186826094985,
+          "mean_abs_normalized_advantage": 0.8733725154888816,
+          "fraction_nonzero_advantage": 1.0
+        },
+        "easy": {
+          "n_groups": 16,
+          "n_generations": 64,
+          "informative_group_rate": 1.0,
+          "mean_within_group_reward_std": 0.4098312109708786,
+          "median_within_group_reward_std": 0.4150642454624176,
+          "variance_normalized_advantage": 0.9999930976113216,
+          "variance_centred_reward": 0.21493268013000488,
+          "mean_abs_normalized_advantage": 0.869950777181657,
+          "fraction_nonzero_advantage": 1.0
+        }
+      }
+    },
+    "8": {
+      "overall": {
+        "n_groups": 24,
+        "n_generations": 192,
+        "informative_group_rate": 0.9583333333333334,
+        "mean_within_group_reward_std": 0.619054414331913,
+        "median_within_group_reward_std": 0.4710747301578522,
+        "variance_normalized_advantage": 0.9583290636625043,
+        "variance_centred_reward": 0.5598951438441873,
+        "mean_abs_normalized_advantage": 0.7939281876278983,
+        "fraction_nonzero_advantage": 0.9583333333333334
+      },
+      "by_difficulty": {
+        "hard": {
+          "n_groups": 8,
+          "n_generations": 64,
+          "informative_group_rate": 0.875,
+          "mean_within_group_reward_std": 0.7633688487112522,
+          "median_within_group_reward_std": 0.6901349425315857,
+          "variance_normalized_advantage": 0.8749973728033363,
+          "variance_centred_reward": 0.8869009069167078,
+          "mean_abs_normalized_advantage": 0.7564107195939869,
+          "fraction_nonzero_advantage": 0.875
+        },
+        "medium": {
+          "n_groups": 8,
+          "n_generations": 64,
+          "informative_group_rate": 1.0,
+          "mean_within_group_reward_std": 0.5990220718085766,
+          "median_within_group_reward_std": 0.554256334900856,
+          "variance_normalized_advantage": 0.9999956106586684,
+          "variance_centred_reward": 0.44691224163398147,
+          "mean_abs_normalized_advantage": 0.792619289826689,
+          "fraction_nonzero_advantage": 1.0
+        },
+        "easy": {
+          "n_groups": 8,
+          "n_generations": 64,
+          "informative_group_rate": 1.0,
+          "mean_within_group_reward_std": 0.4947723224759102,
+          "median_within_group_reward_std": 0.4295704513788223,
+          "variance_normalized_advantage": 0.999994207525508,
+          "variance_centred_reward": 0.34587228298187256,
+          "mean_abs_normalized_advantage": 0.832754553463019,
+          "fraction_nonzero_advantage": 1.0
+        }
+      }
+    }
+  },
+  "difficulty_cuts": {
+    "tertile_cut_low": 1.3125813802083335,
+    "tertile_cut_high": 2.4212239583333335
+  },
+  "prompt_difficulty": {
+    "124": {
+      "mean_reward": 2.375,
+      "bin": "medium"
+    },
+    "671": {
+      "mean_reward": -1.45556640625,
+      "bin": "hard"
+    },
+    "510": {
+      "mean_reward": 1.86572265625,
+      "bin": "medium"
+    },
+    "981": {
+      "mean_reward": 2.2646484375,
+      "bin": "medium"
+    },
+    "175": {
+      "mean_reward": 0.7420654296875,
+      "bin": "hard"
+    },
+    "185": {
+      "mean_reward": 2.4599609375,
+      "bin": "easy"
+    },
+    "953": {
+      "mean_reward": 0.73388671875,
+      "bin": "hard"
+    },
+    "873": {
+      "mean_reward": 2.1845703125,
+      "bin": "medium"
+    },
+    "796": {
+      "mean_reward": 1.81658935546875,
+      "bin": "medium"
+    },
+    "263": {
+      "mean_reward": 2.4296875,
+      "bin": "easy"
+    },
+    "507": {
+      "mean_reward": 3.220703125,
+      "bin": "easy"
+    },
+    "961": {
+      "mean_reward": -0.1944580078125,
+      "bin": "hard"
+    },
+    "280": {
+      "mean_reward": 1.2734375,
+      "bin": "hard"
+    },
+    "936": {
+      "mean_reward": 0.8939208984375,
+      "bin": "hard"
+    },
+    "254": {
+      "mean_reward": 1.3321533203125,
+      "bin": "medium"
+    },
+    "463": {
+      "mean_reward": 3.00390625,
+      "bin": "easy"
+    },
+    "436": {
+      "mean_reward": 2.212890625,
+      "bin": "medium"
+    },
+    "942": {
+      "mean_reward": 2.6875,
+      "bin": "easy"
+    },
+    "184": {
+      "mean_reward": 2.966796875,
+      "bin": "easy"
+    },
+    "922": {
+      "mean_reward": 2.4169921875,
+      "bin": "medium"
+    },
+    "755": {
+      "mean_reward": 3.072265625,
+      "bin": "easy"
+    },
+    "457": {
+      "mean_reward": -0.85198974609375,
+      "bin": "hard"
+    },
+    "832": {
+      "mean_reward": 2.65625,
+      "bin": "easy"
+    },
+    "495": {
+      "mean_reward": -1.42041015625,
+      "bin": "hard"
+    }
+  },
+  "n_prompts": 24,
+  "cached_completions_clipped_at_cap": 29,
+  "cache_generation_cap": 768
+}

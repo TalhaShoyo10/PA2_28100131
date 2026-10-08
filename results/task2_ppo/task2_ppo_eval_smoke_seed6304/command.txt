@@ -1,0 +1,1 @@
+python -m task2_ppo.evaluate --adapter outputs/task2_ppo/smoke --name smoke --limit 4

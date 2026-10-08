@@ -1,0 +1,18 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791375909.639659    4233 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791375912.043658    4233 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+[skip] task2_ppo_train_fork_eps005_kl010_seed6304 already done; adapter at /content/PA2/outputs/task2_ppo/fork_eps005_kl010
+[run_record] previous failed attempt archived to /content/drive/MyDrive/ATML_PA2/results/task2_ppo/task2_ppo_eval_fork_eps005_kl010_seed6304__attempt1
+  evaluated 16/165
+  evaluated 32/165
+  evaluated 48/165
+  evaluated 64/165
+  evaluated 80/165
+  evaluated 96/165
+  evaluated 112/165
+  evaluated 128/165
+  evaluated 144/165
+  evaluated 160/165
+  evaluated 165/165

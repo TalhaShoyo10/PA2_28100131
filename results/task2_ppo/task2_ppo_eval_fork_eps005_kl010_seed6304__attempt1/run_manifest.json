@@ -1,0 +1,32 @@
+{
+  "experiment_id": "task2_ppo_eval_fork_eps005_kl010_seed6304",
+  "started_at": "2026-10-07T12:07:52+00:00",
+  "git": {
+    "commit": "0c32299df0f0a5e7e8426360887807ca47c12871",
+    "branch": "main",
+    "dirty_tracked_files": false
+  },
+  "command": "python -m task2_ppo.analyze_clipping --part forks --only 0.05",
+  "seed": 6304,
+  "runtime": {
+    "worker": "acct1",
+    "python": "3.13.15",
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.1",
+    "peft": "0.17.1",
+    "trl": "0.27.2",
+    "cuda_available": true,
+    "gpu": "Tesla T4",
+    "gpu_total_gib": 14.56
+  },
+  "task": "task2_ppo",
+  "condition": "fork_eps005_kl010",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "checkpoint": "/content/PA2/outputs/task2_ppo/fork_eps005_kl010",
+  "decoding": {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "do_sample": true,
+    "max_new_tokens": 768
+  }
+}

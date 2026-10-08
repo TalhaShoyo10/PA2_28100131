@@ -1,0 +1,25 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791373188.833094    8193 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791373192.542132    8193 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+[standard] update 1/20 reward -0.296 kl +0.0000 ploss +0.0001 vloss 4.850 clip 0.000 len 512 t 32s
+[standard] update 2/20 reward -1.861 kl +0.0002 ploss -0.0001 vloss 7.194 clip 0.000 len 512 t 62s
+[standard] update 3/20 reward +1.979 kl +0.0028 ploss -0.0001 vloss 33.772 clip 0.000 len 5 t 64s
+[standard] update 4/20 reward +2.588 kl +0.0001 ploss +0.0000 vloss 5.026 clip 0.000 len 510 t 94s
+[standard] update 5/20 reward +0.861 kl -0.0020 ploss +0.0013 vloss 0.892 clip 0.000 len 15 t 96s
+[standard] update 6/20 reward +0.730 kl +0.0011 ploss +0.0002 vloss 4.482 clip 0.000 len 32 t 100s
+[standard] update 7/20 reward +2.848 kl +0.0000 ploss +0.0003 vloss 4.910 clip 0.000 len 228 t 114s
+[standard] update 8/20 reward -0.371 kl +0.0004 ploss -0.0002 vloss 2.955 clip 0.000 len 65 t 118s
+[standard] update 9/20 reward +2.586 kl +0.0001 ploss +0.0000 vloss 6.138 clip 0.000 len 413 t 143s
+[standard] update 10/20 reward +2.035 kl +0.0001 ploss -0.0002 vloss 2.846 clip 0.000 len 512 t 173s
+[standard] update 11/20 reward +2.082 kl -0.0001 ploss +0.0001 vloss 3.142 clip 0.000 len 198 t 185s
+[standard] update 12/20 reward +1.591 kl +0.0001 ploss -0.0002 vloss 3.402 clip 0.000 len 211 t 198s
+[standard] update 13/20 reward +0.745 kl -0.0012 ploss -0.0004 vloss 1.258 clip 0.000 len 56 t 203s
+[standard] update 14/20 reward +2.945 kl -0.0005 ploss -0.0009 vloss 4.714 clip 0.000 len 10 t 204s
+[standard] update 15/20 reward +2.086 kl +0.0001 ploss +0.0002 vloss 2.599 clip 0.000 len 215 t 218s
+[standard] update 16/20 reward +1.772 kl +0.0006 ploss -0.0001 vloss 5.586 clip 0.000 len 4 t 219s
+[standard] update 17/20 reward -1.632 kl +0.0005 ploss +0.0000 vloss 4.985 clip 0.000 len 53 t 224s
+[standard] update 18/20 reward -0.177 kl +0.0002 ploss -0.0001 vloss 2.176 clip 0.000 len 512 t 253s
+[standard] update 19/20 reward +1.854 kl +0.0011 ploss +0.0000 vloss 4.213 clip 0.000 len 72 t 258s
+[standard] update 20/20 reward +2.115 kl -0.0001 ploss -0.0000 vloss 1.966 clip 0.000 len 493 t 288s

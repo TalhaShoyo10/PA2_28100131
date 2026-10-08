@@ -1,0 +1,38 @@
+{
+  "experiment_id": "task2_ppo_cached_clipping_valid_seed6304",
+  "started_at": "2026-10-07T13:40:48+00:00",
+  "git": {
+    "commit": "cd5c9a729642c7014ca827f41acd51fdf00da9be",
+    "branch": "main",
+    "dirty_tracked_files": false
+  },
+  "command": "python -m task2_ppo.analyze_clipping --part cached",
+  "seed": 6304,
+  "runtime": {
+    "worker": "acct1",
+    "python": "3.13.15",
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.1",
+    "peft": "0.17.1",
+    "trl": "0.27.2",
+    "cuda_available": true,
+    "gpu": "Tesla T4",
+    "gpu_total_gib": 14.56
+  },
+  "task": "task2_ppo",
+  "condition": "cached_clipping",
+  "checkpoint": "checkpoints/ppo_midpoint_policy",
+  "cache": "cached/ppo_rollout.pt",
+  "epsilons": [
+    0.05,
+    0.2,
+    0.5
+  ],
+  "ppo_epochs": 2,
+  "ended_at": "2026-10-07T13:42:56+00:00",
+  "wall_clock_seconds": 127.8,
+  "peak_vram_allocated_gib": 3.833,
+  "artifacts": {
+    "steps": "cached_steps.jsonl"
+  }
+}

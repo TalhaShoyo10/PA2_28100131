@@ -1,0 +1,9 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791373026.220061    7498 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791373028.928306    7498 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+Rebuilt 32/32 cached rollouts
+eps 0.05: {'clip_fraction': 0.1525981397950645, 'affected_fraction': 0.07612888636720513, 'surrogate_unclipped': 0.0005022311472238807, 'surrogate_clipped': -0.012239582732647816, 'approx_kl_old_new': 0.028601141865776208, 'ratio_max': 32.56146240234375, 'ratio_min': 2.263289555770598e-09, 'tokens': 8814}
+eps 0.20: {'clip_fraction': 0.041184480550768884, 'affected_fraction': 0.019514408947032224, 'surrogate_unclipped': 0.0005421543442136133, 'surrogate_clipped': -0.008487514549071389, 'approx_kl_old_new': 0.02859985126159214, 'ratio_max': 32.58512496948242, 'ratio_min': 2.265116538779921e-09, 'tokens': 8814}
+eps 0.50: {'clip_fraction': 0.02110279099400795, 'affected_fraction': 0.009757204476210545, 'surrogate_unclipped': 0.000545352560785195, 'surrogate_clipped': -0.005787117513621538, 'approx_kl_old_new': 0.02860037728917888, 'ratio_max': 32.58546829223633, 'ratio_min': 2.2494404117168187e-09, 'tokens': 8814}
