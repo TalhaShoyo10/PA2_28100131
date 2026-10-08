@@ -147,6 +147,8 @@ python -m task5_feedback.evaluate_math --config configs/feedback.yaml --dataset 
 python -m task5_feedback.compare_feedback --config configs/feedback.yaml
 ```
 
+RLVR and RLAIF are the supplied frozen adapters (evaluation only). All three policies use identical greedy decoding (`math_max_new_tokens`); outputs are in `results/task5_feedback/` (`feedback_comparison.csv`, `diagnostics_table.csv`, `qualitative_candidates.csv`).
+
 ## 6. Reproducibility rules
 
 - Do not alter course-provided data, cached rollouts, or supplied checkpoints.

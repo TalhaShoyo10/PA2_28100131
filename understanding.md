@@ -313,3 +313,40 @@ difference / judge error / both). The script never writes labels.
 **Qualitative pool**: `policy_label_differences.csv` lists, in fixed `xstest_id` order, every prompt whose judge label
 differs across the four policies. Pick harmful-compliance, justified-refusal, and over-refusal examples from it (and
 from the audit) using a rule you state before looking (e.g. the first ID in each category).
+
+---
+
+## 11. Task 5 feedback-source comparison — `task5_feedback/`
+
+**Concept.** The policy family and the group-based optimizer are held ~fixed; only the reward source differs.
+- RLVR: r = 1[designated final == gold], computed by `rlvr.exact_reward` from the **last** `#### <number>`.
+- RLAIF: r_k = (wins + 0.5·ties)/(K−1) from pairwise comparisons by a frozen Qwen-3B judge (`rlaif.PairwiseAIJudge`,
+  which swaps the A/B order deterministically per pair to balance position bias, and caches every verdict).
+
+| Step | Script | What it measures |
+|---|---|---|
+| in-domain | `evaluate_math.py --dataset gsm` | 300 GSM8K problems × {SFT, RLVR, RLAIF}, greedy, ≤512 tokens: exact accuracy, format compliance (a `####` final was parsed), length, truncation; judge RLVR-vs-SFT and RLAIF-vs-SFT (win 1 / tie 0.5 / loss 0); verifier–judge agreement |
+| diagnostics | `score_perturbations.py` | 20 problems × 4 controlled pairs (clean vs each perturbation), scored by verifier and judge: better / tie / wrong rates, S_reason, S_outcome |
+| transfer | `evaluate_math.py --dataset transfer` | the fixed 100 SVAMP problems, same protocol; the drop from GSM8K |
+| combine | `compare_feedback.py` | `feedback_comparison.csv`, `diagnostics_table.csv`, `qualitative_candidates.csv` |
+
+**Verifier–judge agreement.** For each (policy, SFT) pair the verifier "prefers" the response with the higher exact
+reward, or ties if both are equally right or wrong. Agreement = judge verdict equals verifier verdict. Because the
+verifier ties whenever both are correct or both are wrong, the more telling number is
+`judge_agrees_when_verifier_decisive`: when exactly one response is correct, how often the judge picks it.
+
+**Decision records**
+- *Greedy decoding* for all three policies (deterministic; identical settings across conditions).
+- *Pairs for diagnostics*: each perturbed variant vs the same problem's `clean_correct`, which is always the
+  diagnostically better response. For **filler**, preferring the filler version is counted as a wrong preference
+  (a style bias) and a tie as a tie.
+- *S_outcome* primary = the `good_reasoning_wrong_final` pair (manual: reasoning held ~fixed while the final changes);
+  also reported pooled with `gold_distractor_wrong_final`, which also changes the outcome.
+- *Verifier check*: each diagnostic response's verifier reward is compared with the supplied `expected_exact_reward`;
+  `verifier_matches_expected_reward` should be 1.0, otherwise the verifier specification is the finding.
+- *One judge cache* (`pairwise_judge_cache.json`) shared by Steps 1–3; the judge is deterministic, so this only
+  avoids recomputation.
+
+**What to expect from the verifier (not an error):** reasoning pairs → 100% tie (it is blind to reasoning); filler
+pairs → 100% tie; outcome and distractor pairs → 100% "better" if the verifier only reads the last `####`
+(the distractor responses mention the gold number but end with a different designated final).

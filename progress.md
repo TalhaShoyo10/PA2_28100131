@@ -67,7 +67,10 @@ Other items to verify (not confirmed defects):
 - [ ] qualitative evidence
 
 ## Task 4 (only after Task 1–3 standard policies exist)
-- [x] generation / judge / blind audit sheet / evaluation code written (untested on GPU)
+- [x] generation / judge / blind audit sheet / evaluation code written
+- [x] generation (4 policies), judging, blind audit sheet (240 items) run on Colab
+- [ ] student manual labels -> manual_audit_labels.csv
+- [ ] evaluate_safety after labelling
 - [ ] deterministic generation, 4 fixed policies
 - [ ] AI judge labels + aggregate rates
 - [ ] blind audit sheet generated
@@ -75,6 +78,7 @@ Other items to verify (not confirmed defects):
 - [ ] agreement / confusion analysis
 
 ## Task 5
+- [x] GSM8K / diagnostics / SVAMP evaluation and comparison code written (untested on GPU)
 - [ ] GSM8K in-domain eval
 - [ ] diagnostic set (Sreason, Soutcome, per-category)
 - [ ] SVAMP transfer eval
