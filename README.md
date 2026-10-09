@@ -130,7 +130,7 @@ The judge loader/parser are supplied. You must implement the requested generatio
 python -m task4_safety.generate_responses --config configs/feedback.yaml   # greedy, all 4 fixed policies (or --policy <name>)
 python -m task4_safety.judge_responses --config configs/feedback.yaml      # fixed AI judge (or --policy <name>)
 python -m task4_safety.make_audit_sheet --config configs/feedback.yaml     # blind sheet: 60 fixed prompts x 4 policies
-# the student fills results/task4_safety/audit_sheet_blind.csv -> manual_audit_labels.csv (by hand)
+# the student labels audit_sheet_blind.csv by hand (task4_safety/audit_labeler.html, offline) -> manual_audit_labels.csv
 python -m task4_safety.evaluate_safety --config configs/feedback.yaml      # rates, categories, agreement
 ```
 

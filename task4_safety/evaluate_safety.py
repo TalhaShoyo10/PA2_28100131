@@ -89,7 +89,7 @@ def manual_agreement(outdir, frames) -> dict | None:
     if not labels_path.exists():
         print("No manual_audit_labels.csv yet: skipping the agreement analysis.")
         return None
-    manual = pd.read_csv(labels_path)
+    manual = pd.read_csv(labels_path, encoding="utf-8-sig")  # accepts files with or without a UTF-8 BOM
     manual["manual_label"] = manual["manual_label"].astype(str).str.strip().str.upper()
     bad = manual[~manual["manual_label"].isin(LABELS)]
     if len(bad):
