@@ -158,3 +158,35 @@ RLVR and RLAIF are the supplied frozen adapters (evaluation only). All three pol
 - Record peak VRAM and wall-clock time for the standard PPO and GRPO continuations.
 
 See the assignment manual for the required experiments, metrics, and report questions.
+
+## 7. Running on Colab and validating results
+
+All experiments were run on Google Colab (T4) through `colab/PA2_runner.ipynb`, which clones this repository at a
+commit, installs `requirements.txt`, downloads and validates the course assets, runs `tests/`, and then executes the
+commands in Section 5. Shared state lives on Google Drive:
+
+- `outputs/` (trained adapters) is a symlink to Drive;
+- results are written to Drive via `PA2_RESULTS_ROOT` and later copied into `results/` in this repository.
+
+Every experiment directory `results/<task>/<experiment_id>/` contains `status.json`, `run_manifest.json` (git commit,
+command, seed, runtime, timestamps, wall clock, peak VRAM), `config.json`, `command.txt`, `metrics.json`, and its
+generations/logs. A run that was interrupted is archived as `<experiment_id>__attemptN`, never overwritten.
+
+```bash
+python -m pytest tests/ -q                 # objective validation (12 tests)
+python -m scripts.validate_results         # checks every committed result folder before commit
+python -m scripts.release_run <exp_id>     # marks a run from a lost Colab session as failed so it can restart
+```
+
+Implementation notes and decision records: `understanding.md`. Status of every required experiment: `progress.md`.
+
+## 8. Attribution
+
+- Starter code, configurations, fixed data, cached diagnostics, and checkpoints: course release
+  (`AbDu11aHHH/ATML-PA2-LLM-PostTraining`, assets `AbDu11aHHH/ATML-PA2-assets` at revision `0b35048`).
+- Libraries: PyTorch, Hugging Face Transformers, PEFT, TRL (pinned in `requirements.txt`), pandas, NumPy.
+- Models: `Qwen/Qwen2.5-1.5B-Instruct` (policy), `yavuz-ai/qwen2.5-1.5b-rm-ultrafeedback` (reward model),
+  `Qwen/Qwen2.5-3B-Instruct` (AI judge), supplied PPO/GRPO/RLVR/RLAIF adapters.
+- No external code was materially copied. Implementations follow the equations in the assignment manual. Coding
+  assistance from an LLM (Claude) was used for code, as permitted by the course policy; the student is responsible for
+  every submitted line, and `understanding.md` documents what each component does and why.
