@@ -2,9 +2,10 @@
   "experiment_id": "task2_ppo_train_standard_seed6304",
   "started_at": "2026-10-07T11:40:22+00:00",
   "git": {
-    "commit": "0c32299df0f0a5e7e8426360887807ca47c12871",
+    "commit": "2e24001c6c03a6a90982da4231600534226e34d5",
     "branch": "main",
-    "dirty_tracked_files": false
+    "dirty_tracked_files": false,
+    "commit_before_message_rewrite": "0c32299df0f0a5e7e8426360887807ca47c12871"
   },
   "command": "python -m task2_ppo.continue_train --config configs/ppo.yaml --run-name standard",
   "seed": 6304,

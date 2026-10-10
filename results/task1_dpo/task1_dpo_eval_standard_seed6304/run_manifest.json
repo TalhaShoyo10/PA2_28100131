@@ -2,9 +2,10 @@
   "experiment_id": "task1_dpo_eval_standard_seed6304",
   "started_at": "2026-10-06T23:34:30+00:00",
   "git": {
-    "commit": "c526ffbbfe7876616e0dfd1d036653b882f54133",
+    "commit": "6aa295e0f6ec1cb3fce1199a26b9fd6079e2c750",
     "branch": "main",
-    "dirty_tracked_files": false
+    "dirty_tracked_files": false,
+    "commit_before_message_rewrite": "c526ffbbfe7876616e0dfd1d036653b882f54133"
   },
   "command": "python -m task1_dpo.evaluate --config configs/dpo.yaml --adapter outputs/task1_dpo/standard --name standard",
   "seed": 6304,

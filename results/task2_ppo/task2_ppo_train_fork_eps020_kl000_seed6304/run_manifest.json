@@ -2,9 +2,10 @@
   "experiment_id": "task2_ppo_train_fork_eps020_kl000_seed6304",
   "started_at": "2026-10-07T13:06:39+00:00",
   "git": {
-    "commit": "7a6b99ad5a9b77cc004af17763af913c31466a05",
+    "commit": "0492590a01a0ad79cf5462b5ba014d08bfeda6f5",
     "branch": "main",
-    "dirty_tracked_files": false
+    "dirty_tracked_files": false,
+    "commit_before_message_rewrite": "7a6b99ad5a9b77cc004af17763af913c31466a05"
   },
   "command": "python -m task2_ppo.ablate_kl --config configs/ppo.yaml --only 0.0",
   "seed": 6304,

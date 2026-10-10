@@ -2,9 +2,10 @@
   "experiment_id": "task3_grpo_eval_fork_grpo_seed6304",
   "started_at": "2026-10-08T19:29:45+00:00",
   "git": {
-    "commit": "c2fdf5149aac7dcd8e28835bcb7174e3d518c1fc",
+    "commit": "7769d0f75447b3fb0c9cd04e43ec8b1eb3c3bd7b",
     "branch": "main",
-    "dirty_tracked_files": false
+    "dirty_tracked_files": false,
+    "commit_before_message_rewrite": "c2fdf5149aac7dcd8e28835bcb7174e3d518c1fc"
   },
   "command": "python -m task3_grpo.compare_normalization --config configs/grpo.yaml --only grpo",
   "seed": 6304,
