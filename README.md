@@ -178,8 +178,6 @@ python -m scripts.validate_results         # checks every committed result folde
 python -m scripts.release_run <exp_id>     # marks a run from a lost Colab session as failed so it can restart
 ```
 
-Implementation notes and decision records: `understanding.md`. Status of every required experiment: `progress.md`.
-
 ## 8. Attribution
 
 - Starter code, configurations, fixed data, cached diagnostics, and checkpoints: course release
@@ -189,4 +187,4 @@ Implementation notes and decision records: `understanding.md`. Status of every r
   `Qwen/Qwen2.5-3B-Instruct` (AI judge), supplied PPO/GRPO/RLVR/RLAIF adapters.
 - No external code was materially copied. Implementations follow the equations in the assignment manual. Coding
   assistance from an LLM (Claude) was used for code, as permitted by the course policy; the student is responsible for
-  every submitted line, and `understanding.md` documents what each component does and why.
+  every submitted line.

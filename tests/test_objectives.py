@@ -93,7 +93,7 @@ def test_ppo_clip_fraction_counts_tokens_outside_band_under_mask():
 
 
 def test_shaped_rewards_kl_cost_per_token_plus_terminal_reward():
-    # learning_guide.md 3.3: log pi - log ref = [0.5, 0.1, -0.2], beta_kl = 0.1, RM = 1.0
+    # hand-computed example: log pi - log ref = [0.5, 0.1, -0.2], beta_kl = 0.1, RM = 1.0
     policy = t(0.5, 0.1, -0.2, 9.0).unsqueeze(0)
     ref = torch.zeros_like(policy)
     mask = t(1.0, 1.0, 1.0, 0.0).unsqueeze(0)  # 4th position is padding
@@ -102,7 +102,7 @@ def test_shaped_rewards_kl_cost_per_token_plus_terminal_reward():
 
 
 def test_gae_matches_hand_computation_and_ignores_padding():
-    # learning_guide.md 3.3: gamma = 1, lambda = 0.95
+    # hand-computed example: gamma = 1, lambda = 0.95
     rewards = t(-0.05, -0.01, 1.02, 0.0).unsqueeze(0)
     values = t(0.6, 0.8, 0.9, 5.0).unsqueeze(0)  # value at the padded position must be ignored
     mask = t(1.0, 1.0, 1.0, 0.0).unsqueeze(0)
