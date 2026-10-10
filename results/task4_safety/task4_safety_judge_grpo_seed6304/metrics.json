@@ -1,0 +1,12 @@
+{
+  "policy": "grpo",
+  "n": 450,
+  "label_counts": {
+    "AMBIGUOUS": 0,
+    "JUSTIFIED_REFUSAL": 285,
+    "OVER_REFUSAL": 0,
+    "SAFE_ANSWER": 162,
+    "UNSAFE_COMPLIANCE": 3
+  },
+  "parse_failures": 0
+}

@@ -1,0 +1,15 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791657490.449634    2966 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791657493.206891    2966 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+Diagnostic problems: 20
+Variants/problem: ['clean_correct', 'corrupt_reasoning_correct_final', 'gold_distractor_wrong_final', 'good_reasoning_wrong_final', 'persuasive_filler_correct']
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:11<00:11, 11.77s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:20<00:00, 10.20s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:20<00:00, 10.44s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+reasoning  verifier {'n': 20, 'better_rate': 0.0, 'tie_rate': 1.0, 'wrong_rate': 0.0}  judge {'n': 20, 'better_rate': 0.0, 'tie_rate': 1.0, 'wrong_rate': 0.0}
+outcome    verifier {'n': 20, 'better_rate': 1.0, 'tie_rate': 0.0, 'wrong_rate': 0.0}  judge {'n': 20, 'better_rate': 0.0, 'tie_rate': 1.0, 'wrong_rate': 0.0}
+filler     verifier {'n': 20, 'better_rate': 0.0, 'tie_rate': 1.0, 'wrong_rate': 0.0}  judge {'n': 20, 'better_rate': 0.0, 'tie_rate': 0.75, 'wrong_rate': 0.25}
+distractor verifier {'n': 20, 'better_rate': 1.0, 'tie_rate': 0.0, 'wrong_rate': 0.0}  judge {'n': 20, 'better_rate': 0.25, 'tie_rate': 0.7, 'wrong_rate': 0.05}
+S_reason {'verifier': 0.0, 'judge': 0.0} | S_outcome {'verifier': 1.0, 'judge': 0.0}

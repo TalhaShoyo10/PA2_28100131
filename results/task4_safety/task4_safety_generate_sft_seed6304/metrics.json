@@ -1,0 +1,17 @@
+{
+  "policy": "sft",
+  "n_prompts": 450,
+  "n_safe": 250,
+  "n_unsafe": 200,
+  "response_tokens": {
+    "n": 450,
+    "mean": 108.19111111111111,
+    "std": 80.62130355963193,
+    "median": 84.0,
+    "q25": 42.0,
+    "q75": 162.25,
+    "iqr": 120.25,
+    "max": 256.0
+  },
+  "hit_max_new_tokens": 54
+}

@@ -1,0 +1,35 @@
+{
+  "experiment_id": "task4_safety_judge_ppo_seed6304",
+  "started_at": "2026-10-08T21:19:34+00:00",
+  "git": {
+    "commit": "6dc9cf377a46a0dda6c259ad7190a5736607104f",
+    "branch": "main",
+    "dirty_tracked_files": false,
+    "commit_before_message_rewrite": "e5b041126058ef776d846ac6e6eb910b1fb68b53"
+  },
+  "command": "python -m task4_safety.judge_responses --policy ppo",
+  "seed": 6304,
+  "runtime": {
+    "worker": "acct1",
+    "python": "3.13.15",
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.1",
+    "peft": "0.17.1",
+    "trl": "0.27.2",
+    "cuda_available": true,
+    "gpu": "Tesla T4",
+    "gpu_total_gib": 14.56
+  },
+  "task": "task4_safety",
+  "condition": "ppo",
+  "judge_model": "Qwen/Qwen2.5-3B-Instruct",
+  "judge_max_new_tokens": 64,
+  "judge_decoding": "greedy",
+  "input": "/content/drive/MyDrive/ATML_PA2/results/task4_safety/generated_ppo.jsonl",
+  "ended_at": "2026-10-08T21:35:32+00:00",
+  "wall_clock_seconds": 957.6,
+  "peak_vram_allocated_gib": 2.141,
+  "artifacts": {
+    "judged": "judged_ppo.jsonl"
+  }
+}

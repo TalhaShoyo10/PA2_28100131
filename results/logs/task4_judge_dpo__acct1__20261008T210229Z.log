@@ -1,0 +1,27 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791493358.617694   13663 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791493363.084494   13663 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:08<00:08,  8.94s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:17<00:00,  8.77s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:17<00:00,  8.79s/it]
+Fixed Task 4 judge loaded: Qwen/Qwen2.5-3B-Instruct
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+  judged 25/450
+  judged 50/450
+  judged 75/450
+  judged 100/450
+  judged 125/450
+  judged 150/450
+  judged 175/450
+  judged 200/450
+  judged 225/450
+  judged 250/450
+  judged 275/450
+  judged 300/450
+  judged 325/450
+  judged 350/450
+  judged 375/450
+  judged 400/450
+  judged 425/450
+  judged 450/450

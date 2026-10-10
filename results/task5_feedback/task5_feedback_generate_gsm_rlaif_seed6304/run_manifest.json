@@ -1,0 +1,39 @@
+{
+  "experiment_id": "task5_feedback_generate_gsm_rlaif_seed6304",
+  "started_at": "2026-10-10T16:12:21+00:00",
+  "git": {
+    "commit": "da6349eed3d22951dba771e90ca73fde8d21f1ba",
+    "branch": "main",
+    "dirty_tracked_files": false,
+    "commit_before_message_rewrite": "e1a4c58e6b89787ce743166342e254141572dc36"
+  },
+  "command": "python -m task5_feedback.evaluate_math --dataset gsm",
+  "seed": 6304,
+  "runtime": {
+    "worker": "acct1",
+    "python": "3.13.15",
+    "torch": "2.11.0+cu130",
+    "transformers": "4.57.1",
+    "peft": "0.17.1",
+    "trl": "0.27.2",
+    "cuda_available": true,
+    "gpu": "Tesla T4",
+    "gpu_total_gib": 14.56
+  },
+  "task": "task5_feedback",
+  "dataset": "gsm",
+  "condition": "rlaif",
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "checkpoint": "checkpoints/rlaif_policy",
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 512,
+    "batch_size": 16
+  },
+  "ended_at": "2026-10-10T16:20:16+00:00",
+  "wall_clock_seconds": 475.0,
+  "peak_vram_allocated_gib": 3.285,
+  "artifacts": {
+    "generated": "generated_gsm_rlaif.jsonl"
+  }
+}

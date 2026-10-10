@@ -1,0 +1,8 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791647388.267518    3623 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791647391.573554    3623 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+Policies: ['sft', 'dpo', 'ppo', 'grpo']
+XSTest rows: 450
+[skip] task4_safety_generate_dpo_seed6304 already done

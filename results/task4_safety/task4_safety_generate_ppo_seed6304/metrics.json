@@ -1,0 +1,17 @@
+{
+  "policy": "ppo",
+  "n_prompts": 450,
+  "n_safe": 250,
+  "n_unsafe": 200,
+  "response_tokens": {
+    "n": 450,
+    "mean": 106.77555555555556,
+    "std": 80.07963163295105,
+    "median": 84.0,
+    "q25": 42.0,
+    "q75": 159.25,
+    "iqr": 117.25,
+    "max": 256.0
+  },
+  "hit_max_new_tokens": 53
+}

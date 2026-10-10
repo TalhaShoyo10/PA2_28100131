@@ -1,0 +1,17 @@
+{
+  "policy": "dpo",
+  "n_prompts": 450,
+  "n_safe": 250,
+  "n_unsafe": 200,
+  "response_tokens": {
+    "n": 450,
+    "mean": 108.92,
+    "std": 81.55261587193606,
+    "median": 88.5,
+    "q25": 42.0,
+    "q75": 167.75,
+    "iqr": 125.75,
+    "max": 256.0
+  },
+  "hit_max_new_tokens": 52
+}

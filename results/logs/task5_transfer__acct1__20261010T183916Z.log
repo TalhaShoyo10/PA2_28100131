@@ -1,0 +1,35 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791657563.364848    3281 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791657566.987266    3281 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+Rows: 100 | policies: ['sft', 'rlvr', 'rlaif']
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  sft: generated 16/100
+  sft: generated 32/100
+  sft: generated 48/100
+  sft: generated 64/100
+  sft: generated 80/100
+  sft: generated 96/100
+  sft: generated 100/100
+  rlvr: generated 16/100
+  rlvr: generated 32/100
+  rlvr: generated 48/100
+  rlvr: generated 64/100
+  rlvr: generated 80/100
+  rlvr: generated 96/100
+  rlvr: generated 100/100
+  rlaif: generated 16/100
+  rlaif: generated 32/100
+  rlaif: generated 48/100
+  rlaif: generated 64/100
+  rlaif: generated 80/100
+  rlaif: generated 96/100
+  rlaif: generated 100/100
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:16<00:16, 16.25s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:25<00:00, 12.05s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:25<00:00, 12.68s/it]
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+sft    acc 0.420 format 0.550 len 163
+rlvr   acc 0.460 format 0.580 len 164
+rlaif  acc 0.480 format 0.620 len 164
+rlvr_vs_sft: win 0.530 (W/T/L 14/78/8) agreement 0.780
+rlaif_vs_sft: win 0.535 (W/T/L 14/79/7) agreement 0.770

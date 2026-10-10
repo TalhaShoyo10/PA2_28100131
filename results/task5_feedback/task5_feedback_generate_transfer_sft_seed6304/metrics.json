@@ -1,0 +1,16 @@
+{
+  "n": 100,
+  "exact_accuracy": 0.42,
+  "format_compliance": 0.55,
+  "response_tokens": {
+    "n": 100,
+    "mean": 163.35,
+    "std": 70.86428931415314,
+    "median": 143.0,
+    "q25": 113.75,
+    "q75": 193.0,
+    "iqr": 79.25,
+    "max": 361.0
+  },
+  "truncation_rate": 0.0
+}

@@ -1,0 +1,79 @@
+policy  n_safe  n_unsafe  safe_answer_rate  over_refusal_rate  unsafe_compliance_rate  justified_refusal_rate  ambiguous_rate  ambiguous_rate_safe  ambiguous_rate_unsafe  class_inconsistent_label_rate  parse_failures  response_tokens_mean  response_tokens_std
+   sft     250       200             0.572                0.0                     0.0                   0.885             0.0                  0.0                    0.0                       0.288889               0            108.191111            80.621304
+   dpo     250       200             0.556                0.0                     0.0                   0.865             0.0                  0.0                    0.0                       0.306667               0            108.920000            81.552616
+   ppo     250       200             0.568                0.0                     0.0                   0.885             0.0                  0.0                    0.0                       0.291111               0            106.775556            80.079632
+  grpo     250       200             0.556                0.0                     0.0                   0.885             0.0                  0.0                    0.0                       0.297778               0            107.402222            80.134778
+{
+  "n_items": 240,
+  "overall_agreement": 0.775,
+  "overall_cohen_kappa": 0.5243687610099824,
+  "manual_ambiguous_rate": 0.03333333333333333,
+  "judge_ambiguous_rate_on_audit": 0.0,
+  "by_policy": {
+    "dpo": {
+      "n": 60,
+      "agreement": 0.7666666666666667,
+      "cohen_kappa": 0.5121951219512196
+    },
+    "grpo": {
+      "n": 60,
+      "agreement": 0.7666666666666667,
+      "cohen_kappa": 0.5011876484560572
+    },
+    "ppo": {
+      "n": 60,
+      "agreement": 0.7833333333333333,
+      "cohen_kappa": 0.5419847328244275
+    },
+    "sft": {
+      "n": 60,
+      "agreement": 0.7833333333333333,
+      "cohen_kappa": 0.5419847328244275
+    }
+  },
+  "by_class": {
+    "SAFE": {
+      "n": 120,
+      "agreement": 0.6583333333333333
+    },
+    "UNSAFE": {
+      "n": 120,
+      "agreement": 0.8916666666666667
+    }
+  },
+  "disagreement_classification": {
+    "n_rows": 54,
+    "n_classified": 54,
+    "counts": {
+      "policy_difference": 37,
+      "judge_error": 17
+    },
+    "by_policy": {
+      "dpo": {
+        "policy_difference": 10,
+        "judge_error": 4
+      },
+      "grpo": {
+        "policy_difference": 9,
+        "judge_error": 5
+      },
+      "ppo": {
+        "policy_difference": 9,
+        "judge_error": 4
+      },
+      "sft": {
+        "policy_difference": 9,
+        "judge_error": 4
+      }
+    },
+    "by_class": {
+      "SAFE": {
+        "policy_difference": 24,
+        "judge_error": 17
+      },
+      "UNSAFE": {
+        "policy_difference": 13
+      }
+    }
+  }
+}

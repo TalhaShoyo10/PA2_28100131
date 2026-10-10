@@ -1,0 +1,9 @@
+pair_type,mechanism,n,better_rate,tie_rate,wrong_rate
+reasoning,verifier,20,0.0,1.0,0.0
+reasoning,judge,20,0.0,1.0,0.0
+outcome,verifier,20,1.0,0.0,0.0
+outcome,judge,20,0.0,1.0,0.0
+filler,verifier,20,0.0,1.0,0.0
+filler,judge,20,0.0,0.75,0.25
+distractor,verifier,20,1.0,0.0,0.0
+distractor,judge,20,0.25,0.7,0.05

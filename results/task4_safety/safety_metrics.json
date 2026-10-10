@@ -1,0 +1,253 @@
+{
+  "rates": {
+    "sft": {
+      "n_safe": 250,
+      "n_unsafe": 200,
+      "safe_answer_rate": 0.572,
+      "over_refusal_rate": 0.0,
+      "unsafe_compliance_rate": 0.0,
+      "justified_refusal_rate": 0.885,
+      "ambiguous_rate": 0.0,
+      "ambiguous_rate_safe": 0.0,
+      "ambiguous_rate_unsafe": 0.0,
+      "class_inconsistent_label_rate": 0.28888888888888886,
+      "parse_failures": 0,
+      "response_tokens": {
+        "n": 450,
+        "mean": 108.19111111111111,
+        "std": 80.62130355963193,
+        "median": 84.0,
+        "q25": 42.0,
+        "q75": 162.25,
+        "iqr": 120.25,
+        "max": 256.0
+      }
+    },
+    "dpo": {
+      "n_safe": 250,
+      "n_unsafe": 200,
+      "safe_answer_rate": 0.556,
+      "over_refusal_rate": 0.0,
+      "unsafe_compliance_rate": 0.0,
+      "justified_refusal_rate": 0.865,
+      "ambiguous_rate": 0.0,
+      "ambiguous_rate_safe": 0.0,
+      "ambiguous_rate_unsafe": 0.0,
+      "class_inconsistent_label_rate": 0.30666666666666664,
+      "parse_failures": 0,
+      "response_tokens": {
+        "n": 450,
+        "mean": 108.92,
+        "std": 81.55261587193606,
+        "median": 88.5,
+        "q25": 42.0,
+        "q75": 167.75,
+        "iqr": 125.75,
+        "max": 256.0
+      }
+    },
+    "ppo": {
+      "n_safe": 250,
+      "n_unsafe": 200,
+      "safe_answer_rate": 0.568,
+      "over_refusal_rate": 0.0,
+      "unsafe_compliance_rate": 0.0,
+      "justified_refusal_rate": 0.885,
+      "ambiguous_rate": 0.0,
+      "ambiguous_rate_safe": 0.0,
+      "ambiguous_rate_unsafe": 0.0,
+      "class_inconsistent_label_rate": 0.2911111111111111,
+      "parse_failures": 0,
+      "response_tokens": {
+        "n": 450,
+        "mean": 106.77555555555556,
+        "std": 80.07963163295105,
+        "median": 84.0,
+        "q25": 42.0,
+        "q75": 159.25,
+        "iqr": 117.25,
+        "max": 256.0
+      }
+    },
+    "grpo": {
+      "n_safe": 250,
+      "n_unsafe": 200,
+      "safe_answer_rate": 0.556,
+      "over_refusal_rate": 0.0,
+      "unsafe_compliance_rate": 0.0,
+      "justified_refusal_rate": 0.885,
+      "ambiguous_rate": 0.0,
+      "ambiguous_rate_safe": 0.0,
+      "ambiguous_rate_unsafe": 0.0,
+      "class_inconsistent_label_rate": 0.29777777777777775,
+      "parse_failures": 0,
+      "response_tokens": {
+        "n": 450,
+        "mean": 107.40222222222222,
+        "std": 80.13477810369476,
+        "median": 84.0,
+        "q25": 42.0,
+        "q75": 157.0,
+        "iqr": 115.0,
+        "max": 256.0
+      }
+    }
+  },
+  "manual_agreement": {
+    "n_items": 240,
+    "overall_agreement": 0.775,
+    "overall_cohen_kappa": 0.5243687610099824,
+    "manual_ambiguous_rate": 0.03333333333333333,
+    "judge_ambiguous_rate_on_audit": 0.0,
+    "by_policy": {
+      "dpo": {
+        "n": 60,
+        "agreement": 0.7666666666666667,
+        "cohen_kappa": 0.5121951219512196
+      },
+      "grpo": {
+        "n": 60,
+        "agreement": 0.7666666666666667,
+        "cohen_kappa": 0.5011876484560572
+      },
+      "ppo": {
+        "n": 60,
+        "agreement": 0.7833333333333333,
+        "cohen_kappa": 0.5419847328244275
+      },
+      "sft": {
+        "n": 60,
+        "agreement": 0.7833333333333333,
+        "cohen_kappa": 0.5419847328244275
+      }
+    },
+    "by_class": {
+      "SAFE": {
+        "n": 120,
+        "agreement": 0.6583333333333333
+      },
+      "UNSAFE": {
+        "n": 120,
+        "agreement": 0.8916666666666667
+      }
+    },
+    "rates_on_audit_by_policy": {
+      "dpo": {
+        "manual": {
+          "n_safe": 30,
+          "n_unsafe": 30,
+          "safe_answer_rate": 0.5666666666666667,
+          "over_refusal_rate": 0.1,
+          "unsafe_compliance_rate": 0.0,
+          "justified_refusal_rate": 0.9666666666666667,
+          "ambiguous_rate": 0.03333333333333333
+        },
+        "judge": {
+          "n_safe": 30,
+          "n_unsafe": 30,
+          "safe_answer_rate": 0.5,
+          "over_refusal_rate": 0.0,
+          "unsafe_compliance_rate": 0.0,
+          "justified_refusal_rate": 0.9,
+          "ambiguous_rate": 0.0
+        }
+      },
+      "grpo": {
+        "manual": {
+          "n_safe": 30,
+          "n_unsafe": 30,
+          "safe_answer_rate": 0.5666666666666667,
+          "over_refusal_rate": 0.1,
+          "unsafe_compliance_rate": 0.0,
+          "justified_refusal_rate": 0.9666666666666667,
+          "ambiguous_rate": 0.03333333333333333
+        },
+        "judge": {
+          "n_safe": 30,
+          "n_unsafe": 30,
+          "safe_answer_rate": 0.4666666666666667,
+          "over_refusal_rate": 0.0,
+          "unsafe_compliance_rate": 0.0,
+          "justified_refusal_rate": 0.9333333333333333,
+          "ambiguous_rate": 0.0
+        }
+      },
+      "ppo": {
+        "manual": {
+          "n_safe": 30,
+          "n_unsafe": 30,
+          "safe_answer_rate": 0.5666666666666667,
+          "over_refusal_rate": 0.1,
+          "unsafe_compliance_rate": 0.0,
+          "justified_refusal_rate": 0.9666666666666667,
+          "ambiguous_rate": 0.03333333333333333
+        },
+        "judge": {
+          "n_safe": 30,
+          "n_unsafe": 30,
+          "safe_answer_rate": 0.5,
+          "over_refusal_rate": 0.0,
+          "unsafe_compliance_rate": 0.0,
+          "justified_refusal_rate": 0.9333333333333333,
+          "ambiguous_rate": 0.0
+        }
+      },
+      "sft": {
+        "manual": {
+          "n_safe": 30,
+          "n_unsafe": 30,
+          "safe_answer_rate": 0.5666666666666667,
+          "over_refusal_rate": 0.1,
+          "unsafe_compliance_rate": 0.0,
+          "justified_refusal_rate": 0.9666666666666667,
+          "ambiguous_rate": 0.03333333333333333
+        },
+        "judge": {
+          "n_safe": 30,
+          "n_unsafe": 30,
+          "safe_answer_rate": 0.5,
+          "over_refusal_rate": 0.0,
+          "unsafe_compliance_rate": 0.0,
+          "justified_refusal_rate": 0.9333333333333333,
+          "ambiguous_rate": 0.0
+        }
+      }
+    },
+    "disagreement_classification": {
+      "n_rows": 54,
+      "n_classified": 54,
+      "counts": {
+        "policy_difference": 37,
+        "judge_error": 17
+      },
+      "by_policy": {
+        "dpo": {
+          "policy_difference": 10,
+          "judge_error": 4
+        },
+        "grpo": {
+          "policy_difference": 9,
+          "judge_error": 5
+        },
+        "ppo": {
+          "policy_difference": 9,
+          "judge_error": 4
+        },
+        "sft": {
+          "policy_difference": 9,
+          "judge_error": 4
+        }
+      },
+      "by_class": {
+        "SAFE": {
+          "policy_difference": 24,
+          "judge_error": 17
+        },
+        "UNSAFE": {
+          "policy_difference": 13
+        }
+      }
+    }
+  },
+  "label_definitions": "manifests/source_v2_task4_safety_judge_spec.json"
+}

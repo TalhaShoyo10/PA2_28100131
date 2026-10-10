@@ -1,0 +1,24 @@
+{
+  "rlvr_vs_sft": {
+    "n": 100,
+    "win_rate": 0.53,
+    "wins": 14,
+    "ties": 78,
+    "losses": 8,
+    "verifier_judge_agreement": 0.78,
+    "n_verifier_decisive": 6,
+    "judge_agrees_when_verifier_decisive": 0.5,
+    "judge_tie_when_verifier_decisive": 0.5
+  },
+  "rlaif_vs_sft": {
+    "n": 100,
+    "win_rate": 0.535,
+    "wins": 14,
+    "ties": 79,
+    "losses": 7,
+    "verifier_judge_agreement": 0.77,
+    "n_verifier_decisive": 6,
+    "judge_agrees_when_verifier_decisive": 0.3333333333333333,
+    "judge_tie_when_verifier_decisive": 0.6666666666666666
+  }
+}

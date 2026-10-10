@@ -1,0 +1,4 @@
+policy,gsm_exact_accuracy,svamp_exact_accuracy,accuracy_drop_gsm_to_svamp,gsm_format_compliance,svamp_format_compliance,gsm_len_mean,gsm_len_std,svamp_len_mean,svamp_len_std,gsm_truncation_rate,svamp_truncation_rate,gsm_win_rate_vs_sft,gsm_ties_vs_sft,svamp_win_rate_vs_sft,svamp_ties_vs_sft,win_rate_drop_gsm_to_svamp,gsm_verifier_judge_agreement,gsm_judge_agrees_when_verifier_decisive,svamp_verifier_judge_agreement
+sft,0.2733333333333333,0.42,-0.14666666666666667,0.35333333333333333,0.55,275.0966666666667,86.37677536364866,163.35,70.86428931415314,0.02,0.0,,,,,,,,
+rlvr,0.29333333333333333,0.46,-0.16666666666666669,0.36333333333333334,0.58,275.75,87.86399053840734,164.41,72.14860982721704,0.023333333333333334,0.0,0.5033333333333333,290.0,0.53,78.0,-0.026666666666666727,0.93,0.0,0.78
+rlaif,0.29,0.48,-0.19,0.36333333333333334,0.62,276.64,87.08668325295206,164.32,73.00354511939814,0.023333333333333334,0.0,0.5,292.0,0.535,79.0,-0.03500000000000003,0.96,0.0,0.77

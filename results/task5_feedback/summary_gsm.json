@@ -1,0 +1,78 @@
+{
+  "dataset": "gsm",
+  "n_problems": 300,
+  "policies": {
+    "sft": {
+      "n": 300,
+      "exact_accuracy": 0.2733333333333333,
+      "format_compliance": 0.35333333333333333,
+      "response_tokens": {
+        "n": 300,
+        "mean": 275.0966666666667,
+        "std": 86.37677536364866,
+        "median": 261.0,
+        "q25": 211.25,
+        "q75": 328.25,
+        "iqr": 117.0,
+        "max": 512.0
+      },
+      "truncation_rate": 0.02
+    },
+    "rlvr": {
+      "n": 300,
+      "exact_accuracy": 0.29333333333333333,
+      "format_compliance": 0.36333333333333334,
+      "response_tokens": {
+        "n": 300,
+        "mean": 275.75,
+        "std": 87.86399053840734,
+        "median": 261.0,
+        "q25": 210.0,
+        "q75": 328.0,
+        "iqr": 118.0,
+        "max": 512.0
+      },
+      "truncation_rate": 0.023333333333333334
+    },
+    "rlaif": {
+      "n": 300,
+      "exact_accuracy": 0.29,
+      "format_compliance": 0.36333333333333334,
+      "response_tokens": {
+        "n": 300,
+        "mean": 276.64,
+        "std": 87.08668325295206,
+        "median": 261.0,
+        "q25": 213.5,
+        "q75": 331.5,
+        "iqr": 118.0,
+        "max": 512.0
+      },
+      "truncation_rate": 0.023333333333333334
+    }
+  },
+  "pairwise": {
+    "rlvr_vs_sft": {
+      "n": 300,
+      "win_rate": 0.5033333333333333,
+      "wins": 6,
+      "ties": 290,
+      "losses": 4,
+      "verifier_judge_agreement": 0.93,
+      "n_verifier_decisive": 12,
+      "judge_agrees_when_verifier_decisive": 0.0,
+      "judge_tie_when_verifier_decisive": 0.9166666666666666
+    },
+    "rlaif_vs_sft": {
+      "n": 300,
+      "win_rate": 0.5,
+      "wins": 4,
+      "ties": 292,
+      "losses": 4,
+      "verifier_judge_agreement": 0.96,
+      "n_verifier_decisive": 5,
+      "judge_agrees_when_verifier_decisive": 0.0,
+      "judge_tie_when_verifier_decisive": 0.8
+    }
+  }
+}

@@ -1,0 +1,19 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791657253.174909    1892 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791657256.711435    1892 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+Rows: 300 | policies: ['sft', 'rlvr', 'rlaif']
+[skip] task5_feedback_generate_gsm_sft_seed6304 already done
+[skip] task5_feedback_generate_gsm_rlvr_seed6304 already done
+[skip] task5_feedback_generate_gsm_rlaif_seed6304 already done
+[run_record] previous running attempt archived to /content/drive/MyDrive/ATML_PA2/results/task5_feedback/task5_feedback_pairwise_gsm_seed6304__attempt1
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [01:04<01:04, 64.51s/it]Fetching 2 files: 100%|██████████| 2/2 [01:04<00:00, 32.26s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:11<00:11, 11.82s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:20<00:00, 10.12s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:20<00:00, 10.38s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+sft    acc 0.273 format 0.353 len 275
+rlvr   acc 0.293 format 0.363 len 276
+rlaif  acc 0.290 format 0.363 len 277
+rlvr_vs_sft: win 0.503 (W/T/L 6/290/4) agreement 0.930
+rlaif_vs_sft: win 0.500 (W/T/L 4/292/4) agreement 0.960

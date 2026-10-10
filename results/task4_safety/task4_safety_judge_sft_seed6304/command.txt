@@ -1,0 +1,1 @@
+python -m task4_safety.judge_responses --policy sft

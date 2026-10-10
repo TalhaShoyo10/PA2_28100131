@@ -1,0 +1,67 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791647801.390823    5471 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791647803.763238    5471 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+Rows: 300 | policies: ['sft', 'rlvr', 'rlaif']
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+  sft: generated 16/300
+  sft: generated 32/300
+  sft: generated 48/300
+  sft: generated 64/300
+  sft: generated 80/300
+  sft: generated 96/300
+  sft: generated 112/300
+  sft: generated 128/300
+  sft: generated 144/300
+  sft: generated 160/300
+  sft: generated 176/300
+  sft: generated 192/300
+  sft: generated 208/300
+  sft: generated 224/300
+  sft: generated 240/300
+  sft: generated 256/300
+  sft: generated 272/300
+  sft: generated 288/300
+  sft: generated 300/300
+  rlvr: generated 16/300
+  rlvr: generated 32/300
+  rlvr: generated 48/300
+  rlvr: generated 64/300
+  rlvr: generated 80/300
+  rlvr: generated 96/300
+  rlvr: generated 112/300
+  rlvr: generated 128/300
+  rlvr: generated 144/300
+  rlvr: generated 160/300
+  rlvr: generated 176/300
+  rlvr: generated 192/300
+  rlvr: generated 208/300
+  rlvr: generated 224/300
+  rlvr: generated 240/300
+  rlvr: generated 256/300
+  rlvr: generated 272/300
+  rlvr: generated 288/300
+  rlvr: generated 300/300
+  rlaif: generated 16/300
+  rlaif: generated 32/300
+  rlaif: generated 48/300
+  rlaif: generated 64/300
+  rlaif: generated 80/300
+  rlaif: generated 96/300
+  rlaif: generated 112/300
+  rlaif: generated 128/300
+  rlaif: generated 144/300
+  rlaif: generated 160/300
+  rlaif: generated 176/300
+  rlaif: generated 192/300
+  rlaif: generated 208/300
+  rlaif: generated 224/300
+  rlaif: generated 240/300
+  rlaif: generated 256/300
+  rlaif: generated 272/300
+  rlaif: generated 288/300
+  rlaif: generated 300/300
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [02:44<02:44, 164.95s/it]Fetching 2 files: 100%|██████████| 2/2 [02:44<00:00, 82.47s/it] 
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:16<00:16, 16.96s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:26<00:00, 12.49s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:26<00:00, 13.16s/it]
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.

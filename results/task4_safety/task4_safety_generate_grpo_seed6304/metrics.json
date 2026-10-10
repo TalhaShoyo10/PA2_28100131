@@ -1,0 +1,17 @@
+{
+  "policy": "grpo",
+  "n_prompts": 450,
+  "n_safe": 250,
+  "n_unsafe": 200,
+  "response_tokens": {
+    "n": 450,
+    "mean": 107.40222222222222,
+    "std": 80.13477810369476,
+    "median": 84.0,
+    "q25": 42.0,
+    "q75": 157.0,
+    "iqr": 115.0,
+    "max": 256.0
+  },
+  "hit_max_new_tokens": 53
+}
