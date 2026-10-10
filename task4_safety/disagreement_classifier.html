@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disagreement Classifier</title>
+<!--
+  Task 4 helper. Fully offline: open in a browser, load results/task4_safety/audit_disagreements.csv
+  (or a partly classified audit_disagreements_classified.csv to resume), classify each manual-vs-judge
+  disagreement, then download audit_disagreements_classified.csv. Nothing is sent anywhere; progress is
+  kept in this browser's localStorage.
+-->
+<style>
+  :root { --bg:#f7f7f5; --card:#fff; --ink:#1d1d1f; --muted:#6b6b70; --line:#dcdcd8; --accent:#2f5bd3; --done:#2e7d32; --you:#2e7d32; --judge:#b2541a; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#151517; --card:#1f1f22; --ink:#ececee; --muted:#9a9aa0; --line:#333338; --accent:#7f9cff; --done:#7bc47f; --you:#7bc47f; --judge:#f0a36b; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, -apple-system, Segoe UI, sans-serif; }
+  main { max-width: 900px; margin: 0 auto; padding: 16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:12px; }
+  h1 { font-size:18px; margin:0 0 8px; }
+  .muted { color:var(--muted); font-size:13px; }
+  .label { font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin-bottom:4px; }
+  .text { white-space:pre-wrap; word-wrap:break-word; max-height:40vh; overflow:auto; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:10px; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:999px; border:1px solid var(--line); font-size:13px; }
+  .you { color:var(--you); font-weight:600; } .judge { color:var(--judge); font-weight:600; }
+  button { font:inherit; padding:8px 12px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--ink); cursor:pointer; }
+  button.choice { flex:1 1 200px; text-align:left; }
+  button.choice.sel { border-color:var(--accent); outline:2px solid var(--accent); }
+  button.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+  kbd { font-size:12px; border:1px solid var(--line); border-radius:4px; padding:0 4px; color:var(--muted); }
+  input[type=text] { width:100%; font:inherit; padding:8px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--ink); }
+  .bar { height:6px; background:var(--line); border-radius:3px; overflow:hidden; }
+  .bar > div { height:100%; background:var(--done); width:0; }
+  table { border-collapse:collapse; font-size:13px; } td { padding:2px 10px 2px 0; vertical-align:top; }
+</style>
+</head>
+<body>
+<main>
+  <div class="card">
+    <h1>Task 4: classify manual-vs-judge disagreements</h1>
+    <label>Load <b>audit_disagreements.csv</b> (or <b>audit_disagreements_classified.csv</b> to resume):
+      <input type="file" id="file" accept=".csv"></label>
+    <p class="muted" id="status">No file loaded.</p>
+    <div class="bar"><div id="progress"></div></div>
+  </div>
+
+  <div id="ui" hidden>
+    <div class="card row" style="justify-content:space-between">
+      <b id="pos"></b>
+      <span class="row">
+        <button id="prev">&larr; Prev <kbd>&larr;</kbd></button>
+        <button id="next">Next <kbd>&rarr;</kbd></button>
+        <button id="nextEmpty">Next unclassified</button>
+      </span>
+    </div>
+    <div class="card grid">
+      <div><div class="label">Model</div><span class="pill" id="policy"></span></div>
+      <div><div class="label">XSTest class / type</div><span id="cls"></span></div>
+      <div><div class="label">Your label</div><span class="you" id="manual"></span></div>
+      <div><div class="label">Judge label</div><span class="judge" id="judgeLabel"></span> <span class="muted" id="judgeMeta"></span></div>
+    </div>
+    <div class="card"><div class="label">Prompt</div><div class="text" id="prompt"></div></div>
+    <div class="card"><div class="label">Response</div><div class="text" id="response"></div></div>
+    <div class="card" id="notesCard"><div class="label">Your note while labelling</div><div class="text muted" id="notes"></div></div>
+    <div class="card">
+      <div class="label">Why do you and the judge disagree?</div>
+      <div class="row" id="choices"></div>
+      <div style="margin-top:10px"><div class="label">Comment (optional)</div>
+        <input type="text" id="comment" placeholder="e.g. judge treats any refusal as justified; my label may be wrong because ..."></div>
+    </div>
+    <div class="card row" style="justify-content:space-between">
+      <span class="muted">Progress is saved in this browser automatically.</span>
+      <button class="primary" id="download">Download audit_disagreements_classified.csv</button>
+    </div>
+    <div class="card">
+      <div class="label">Definitions</div>
+      <table>
+        <tr><td><b>judge_error</b></td><td>the response is clear and ordinary; the judge simply labelled it wrongly</td></tr>
+        <tr><td><b>policy_difference</b></td><td>the response itself is unusual or borderline (partial answer, misread request, odd refusal), which is what makes the label debatable</td></tr>
+        <tr><td><b>both</b></td><td>the model did something unusual <i>and</i> the judge mishandled it</td></tr>
+      </table>
+    </div>
+  </div>
+</main>
+<script>
+const TYPES = ["judge_error", "policy_difference", "both"];
+const STORE = "pa2_disagreement_types_v1";
+let items = [], i = 0, cls = {}, head = [];
+
+function parseCSV(text) {            // RFC 4180: quoted fields may contain commas, quotes and newlines
+  const rows = []; let row = [], field = "", q = false;
+  for (let k = 0; k < text.length; k++) {
+    const c = text[k];
+    if (q) {
+      if (c === '"') { if (text[k + 1] === '"') { field += '"'; k++; } else q = false; }
+      else field += c;
+    } else if (c === '"') q = true;
+    else if (c === ',') { row.push(field); field = ""; }
+    else if (c === '\n' || c === '\r') {
+      if (c === '\r' && text[k + 1] === '\n') k++;
+      row.push(field); rows.push(row); row = []; field = "";
+    } else field += c;
+  }
+  if (field !== "" || row.length) { row.push(field); rows.push(row); }
+  head = rows.shift().map(h => h.replace(/^﻿/, ""));
+  return rows.filter(r => r.length > 1).map(r => Object.fromEntries(head.map((h, j) => [h, r[j] ?? ""])));
+}
+const esc = v => '"' + String(v ?? "").replace(/"/g, '""') + '"';
+function load() { try { cls = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (e) { cls = {}; } }
+function save() { try { localStorage.setItem(STORE, JSON.stringify(cls)); } catch (e) {} }
+
+function render() {
+  const it = items[i], cur = cls[it.audit_item_id] || {};
+  document.getElementById("pos").textContent = `Disagreement ${i + 1} / ${items.length}  (${it.audit_item_id})`;
+  document.getElementById("policy").textContent = it.policy;
+  document.getElementById("cls").textContent = `${it.benchmark_class} / ${it.type}`;
+  document.getElementById("manual").textContent = it.manual_label;
+  document.getElementById("judgeLabel").textContent = it.judge_label;
+  document.getElementById("judgeMeta").textContent = `conf ${it.judge_confidence}${it.judge_rationale_tag ? " · " + it.judge_rationale_tag : ""}`;
+  document.getElementById("prompt").textContent = it.prompt;
+  document.getElementById("response").textContent = it.response;
+  document.getElementById("notes").textContent = it.notes || "(none)";
+  document.getElementById("comment").value = cur.comment || "";
+  document.querySelectorAll("button.choice").forEach(b => b.classList.toggle("sel", b.dataset.t === cur.type));
+  const n = items.filter(x => cls[x.audit_item_id]?.type).length;
+  document.getElementById("status").textContent = `${n} of ${items.length} classified.`;
+  document.getElementById("progress").style.width = (100 * n / items.length) + "%";
+}
+function setType(t) {
+  const id = items[i].audit_item_id;
+  cls[id] = { ...(cls[id] || {}), type: t }; save();
+  if (i < items.length - 1) i++;
+  render();
+}
+TYPES.forEach((t, k) => {
+  const b = document.createElement("button");
+  b.className = "choice"; b.dataset.t = t; b.innerHTML = `<kbd>${k + 1}</kbd> ${t}`;
+  b.onclick = () => setType(t);
+  document.getElementById("choices").appendChild(b);
+});
+document.getElementById("comment").oninput = e => {
+  const id = items[i].audit_item_id; cls[id] = { ...(cls[id] || {}), comment: e.target.value }; save();
+};
+document.getElementById("prev").onclick = () => { if (i > 0) { i--; render(); } };
+document.getElementById("next").onclick = () => { if (i < items.length - 1) { i++; render(); } };
+document.getElementById("nextEmpty").onclick = () => {
+  const k = items.findIndex(x => !cls[x.audit_item_id]?.type); if (k >= 0) { i = k; render(); }
+};
+document.addEventListener("keydown", e => {
+  if (!items.length || e.target.id === "comment") return;
+  if (e.key >= "1" && e.key <= "3") setType(TYPES[+e.key - 1]);
+  if (e.key === "ArrowRight") document.getElementById("next").click();
+  if (e.key === "ArrowLeft") document.getElementById("prev").click();
+});
+document.getElementById("file").onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  const rows = parseCSV(await f.text());
+  if (!rows.length || !("judge_label" in rows[0]) || !("manual_label" in rows[0])) { alert("This is not the disagreements file."); return; }
+  load();
+  rows.forEach(r => {                 // a partly classified file restores its classifications
+    const t = String(r.disagreement_type || "").trim().toLowerCase();
+    if (TYPES.includes(t)) cls[r.audit_item_id] = { type: t, comment: r.classification_comment || "" };
+  });
+  save(); items = rows; i = Math.max(0, items.findIndex(x => !cls[x.audit_item_id]?.type));
+  document.getElementById("ui").hidden = false; render();
+};
+document.getElementById("download").onclick = () => {
+  const missing = items.filter(x => !cls[x.audit_item_id]?.type).length;
+  if (missing && !confirm(`${missing} disagreements are still unclassified. Download anyway (to resume later)?`)) return;
+  const cols = head.filter(h => h !== "disagreement_type" && h !== "classification_comment").concat(["disagreement_type", "classification_comment"]);
+  const lines = [cols.join(",")].concat(items.map(x => {
+    const C = cls[x.audit_item_id] || {};
+    const row = { ...x, disagreement_type: C.type || "", classification_comment: C.comment || "" };
+    return cols.map(c => esc(row[c])).join(",");
+  }));
+  const blob = new Blob(["﻿" + lines.join("\r\n")], { type: "text/csv;charset=utf-8" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "audit_disagreements_classified.csv"; a.click();
+};
+</script>
+</body>
+</html>

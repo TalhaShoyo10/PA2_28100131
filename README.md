@@ -132,6 +132,7 @@ python -m task4_safety.judge_responses --config configs/feedback.yaml      # fix
 python -m task4_safety.make_audit_sheet --config configs/feedback.yaml     # blind sheet: 60 fixed prompts x 4 policies
 # the student labels audit_sheet_blind.csv by hand (task4_safety/audit_labeler.html, offline) -> manual_audit_labels.csv
 python -m task4_safety.evaluate_safety --config configs/feedback.yaml      # rates, categories, agreement
+# the student classifies audit_disagreements.csv (task4_safety/disagreement_classifier.html) -> audit_disagreements_classified.csv, then re-runs evaluate_safety
 ```
 
 Generation refuses to start unless the policy's standard (Step 1) training run is finished, so ablation checkpoints cannot be used.

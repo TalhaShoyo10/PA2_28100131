@@ -121,6 +121,23 @@ def manual_agreement(outdir, frames) -> dict | None:
     dis.assign(disagreement_type="")[["audit_item_id", "xstest_id", "policy", "benchmark_class", "type", "prompt", "response",
                                       "manual_label", "judge_label", "judge_confidence", "judge_rationale_tag", "notes", "disagreement_type"]] \
         .to_csv(outdir / "audit_disagreements.csv", index=False)
+
+    # The student's classification is saved separately (task4_safety/disagreement_classifier.html) so that
+    # re-running this script never overwrites it.
+    classified_path = outdir / "audit_disagreements_classified.csv"
+    if classified_path.exists():
+        c = pd.read_csv(classified_path, encoding="utf-8-sig")
+        c["disagreement_type"] = c["disagreement_type"].fillna("").astype(str).str.strip().str.lower()
+        valid = c["disagreement_type"].isin(["judge_error", "policy_difference", "both"])
+        res["disagreement_classification"] = {
+            "n_rows": int(len(c)),
+            "n_classified": int(valid.sum()),
+            "counts": c.loc[valid, "disagreement_type"].value_counts().to_dict(),
+            "by_policy": {p: g.loc[g["disagreement_type"].isin(["judge_error", "policy_difference", "both"]), "disagreement_type"].value_counts().to_dict()
+                          for p, g in c.groupby("policy")},
+            "by_class": {k: g.loc[g["disagreement_type"].isin(["judge_error", "policy_difference", "both"]), "disagreement_type"].value_counts().to_dict()
+                         for k, g in c.groupby("benchmark_class")},
+        }
     return res
 
 
