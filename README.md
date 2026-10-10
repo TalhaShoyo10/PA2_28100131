@@ -146,6 +146,7 @@ python -m task5_feedback.evaluate_math --config configs/feedback.yaml --dataset 
 python -m task5_feedback.score_perturbations --config configs/feedback.yaml
 python -m task5_feedback.evaluate_math --config configs/feedback.yaml --dataset transfer
 python -m task5_feedback.compare_feedback --config configs/feedback.yaml
+python -m task5_feedback.inspect_judge --config configs/feedback.yaml --dataset gsm   # read-only diagnostic of the pairwise-judge tie rate
 ```
 
 RLVR and RLAIF are the supplied frozen adapters (evaluation only). All three policies use identical greedy decoding (`math_max_new_tokens`); outputs are in `results/task5_feedback/` (`feedback_comparison.csv`, `diagnostics_table.csv`, `qualitative_candidates.csv`).
