@@ -43,3 +43,7 @@ data/*
 progress.md
 understanding.md
 learning_guide.md
+
+# Development-only runs (smoke tests) are not part of the submission
+results/**/*_smoke_*
+results/logs/*smoke*

@@ -1,1 +1,0 @@
-python -m task1_dpo.evaluate --adapter outputs/task1_dpo/smoke --name smoke --limit 4

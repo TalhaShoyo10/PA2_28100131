@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/content/PA2/task2_ppo/continue_train.py", line 177, in run_ppo
-    new_logp = response_token_logprobs(policy, gen["sequences"], gen["attention_mask"], gen["prompt_width"], gen["response_ids"])[0].float()
-               ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/content/PA2/common/generation.py", line 97, in response_token_logprobs
-    chosen = torch.gather(logp, -1, response_ids.unsqueeze(-1)).squeeze(-1)
-             ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-RuntimeError: Inference tensors cannot be saved for backward. Please do not use Tensors created in inference mode in computation tracked by autograd. To work around this, you can make a clone to get a normal tensor and use it in autograd, or use `torch.no_grad()` instead of `torch.inference_mode()`.

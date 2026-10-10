@@ -1,8 +1,0 @@
-{
-  "experiment_id": "task2_ppo_train_smoke_seed6304",
-  "state": "failed",
-  "worker": "acct1",
-  "updated_unix": 1791372497.1911235,
-  "updated_at": "2026-10-07T11:28:17+00:00",
-  "error": "RuntimeError: Inference tensors cannot be saved for backward. Please do not use Tensors created in inference mode in computation tracked by autograd. To work around this, you can make a clone to get a normal tensor and use it in autograd, or use `torch.no_grad()` instead of `torch.inference_mode()`."
-}

@@ -1,9 +1,0 @@
-{
-  "experiment_id": "task2_ppo_eval_fork_eps005_kl010_seed6304",
-  "state": "failed",
-  "worker": "acct1",
-  "updated_unix": 1791375872.0660908,
-  "updated_at": "2026-10-07T12:07:52+00:00",
-  "step": 0,
-  "error": "released manually: session lost (was running on acct1, heartbeat 16.7 min old)"
-}

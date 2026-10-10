@@ -1,1 +1,0 @@
-python -m task3_grpo.evaluate --adapter outputs/task3_grpo/smoke --name smoke --limit 4
