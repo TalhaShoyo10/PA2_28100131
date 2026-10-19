@@ -90,6 +90,7 @@ python -m task1_dpo.evaluate --config configs/dpo.yaml --adapter outputs/task1_d
 python -m task1_dpo.evaluate --config configs/dpo.yaml --name sft             # reference point (SFT)
 python -m task1_dpo.ablate_beta --config configs/dpo.yaml                     # Step 2: beta 0.03/0.10/0.30 (or --only <beta>)
 python -m task1_dpo.analyze_length --config configs/dpo.yaml                  # Step 3: length-balanced + comparison
+python -m task1_dpo.analyze_margins --config configs/dpo.yaml                 # CPU: margin decomposition from saved pairs
 python -m task1_dpo.summarize --config configs/dpo.yaml                       # results/task1_dpo/summary.csv
 ```
 
