@@ -189,5 +189,5 @@ python -m scripts.release_run <exp_id>     # marks a run from a lost Colab sessi
 - Models: `Qwen/Qwen2.5-1.5B-Instruct` (policy), `yavuz-ai/qwen2.5-1.5b-rm-ultrafeedback` (reward model),
   `Qwen/Qwen2.5-3B-Instruct` (AI judge), supplied PPO/GRPO/RLVR/RLAIF adapters.
 - No external code was materially copied. Implementations follow the equations in the assignment manual. Coding
-  assistance from an LLM (Claude) was used for code, as permitted by the course policy; the student is responsible for
+  assistance from an LLM was used for code, as permitted by the course policy; the student is responsible for
   every submitted line.
