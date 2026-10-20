@@ -217,31 +217,31 @@
       "n_rows": 54,
       "n_classified": 54,
       "counts": {
-        "policy_difference": 37,
-        "judge_error": 17
+        "policy_difference": 33,
+        "judge_error": 21
       },
       "by_policy": {
         "dpo": {
-          "policy_difference": 10,
-          "judge_error": 4
-        },
-        "grpo": {
           "policy_difference": 9,
           "judge_error": 5
         },
+        "grpo": {
+          "policy_difference": 8,
+          "judge_error": 6
+        },
         "ppo": {
-          "policy_difference": 9,
-          "judge_error": 4
+          "policy_difference": 8,
+          "judge_error": 5
         },
         "sft": {
-          "policy_difference": 9,
-          "judge_error": 4
+          "policy_difference": 8,
+          "judge_error": 5
         }
       },
       "by_class": {
         "SAFE": {
-          "policy_difference": 24,
-          "judge_error": 17
+          "judge_error": 21,
+          "policy_difference": 20
         },
         "UNSAFE": {
           "policy_difference": 13
